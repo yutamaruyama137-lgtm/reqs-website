@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Detail — REQS / IMA Style</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/reqs-logo-white.svg">
+  <link rel="alternate icon" type="image/png" href="assets/reqs-logo.png">
+  <link rel="apple-touch-icon" href="assets/reqs-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0B1410;
+      --ink-2: #161D18;
+      --paper: #E8F0E8;
+      --paper-2: #DDE8DD;
+      --green: #3FE38C;
+      --green-2: #1F9656;
+      --green-3: #0E5535;
+      --gray-300: #2A2A2A;
+      --gray-400: #3A3A3A;
+      --gray-500: #6B6B6B;
+      --gray-600: #8A8A8A;
+      --gray-700: #BABABA;
+      --rule: rgba(232,240,232,0.14);
+      --rule-light: rgba(11,20,16,0.12);
+
+      --font-jp: "Shippori Mincho", "游明朝", serif;
+      --font-en: "Cormorant Garamond", "Times New Roman", serif;
+      --font-sans: "Inter Tight", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-jp);
+      background: var(--ink);
+      color: var(--paper);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 9998;
+      mix-blend-mode: overlay;
+    }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 28px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference;
+      color: var(--paper);
+    }
+    .nav-logo {
+      font-family: var(--font-sans); font-weight: 700;
+      letter-spacing: 0.04em; font-size: 16px;
+      display: inline-flex; align-items: center; gap: 12px;
+    }
+    .nav-logo .dot { color: var(--green); }
+    .nav-logo img.brand-glyph {
+      height: 22px; width: auto;
+      filter: invert(1);
+      opacity: 0.95;
+    }
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 20px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-back:hover { background: var(--paper); color: var(--ink); }
+
+    .tabs {
+      position: sticky; top: 0;
+      background: var(--ink);
+      padding: 92px 48px 24px;
+      z-index: 90;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      background: transparent;
+      padding: 10px 18px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .tab.active {
+      color: var(--ink);
+      background: var(--green);
+      border-color: var(--green);
+    }
+    .tab:not(.active):hover {
+      color: var(--paper);
+      border-color: var(--paper);
+    }
+    .tab .num {
+      font-family: var(--font-en); font-style: italic;
+      letter-spacing: 0;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 120px 48px 100px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 30%, rgba(63,227,140,0.28), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 90%, rgba(31,150,86,0.2), transparent 60%),
+        var(--ink);
+      z-index: 0;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(232,240,232,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,240,232,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1600px; margin: 0 auto;
+    }
+    .hero-meta {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.16em; color: var(--gray-600);
+      text-transform: uppercase;
+      margin-bottom: 80px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 12px;
+      letter-spacing: 0.2em; color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .hero-eyebrow .line { height: 1px; width: 60px; background: var(--green); }
+
+    .hero-title {
+      font-family: var(--font-en); font-weight: 300;
+      font-size: clamp(64px, 12vw, 200px);
+      line-height: 0.85; letter-spacing: -0.04em;
+    }
+    .hero-title .it { font-style: italic; color: var(--green); }
+    .hero-jp {
+      font-family: var(--font-jp);
+      font-size: clamp(20px, 2vw, 32px);
+      letter-spacing: 0.06em;
+      color: var(--paper);
+      margin-top: 48px;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+    .hero-jp .em { color: var(--green); }
+
+    .hero-bottom {
+      margin-top: 80px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      padding-top: 40px;
+      border-top: 1px solid var(--rule);
+    }
+    .hero-bit-label {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.2em; color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero-bit-value {
+      font-family: var(--font-jp);
+      font-size: 16px;
+      color: var(--paper);
+      line-height: 1.6;
+    }
+
+    section { position: relative; }
+    .section-num {
+      position: absolute; top: 60px; right: 48px;
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.2em;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .overview { padding: 160px 48px; }
+    .overview-grid {
+      max-width: 1600px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 100px;
+    }
+    .section-tag {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.2em; color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-tag::before {
+      content: '§'; font-family: var(--font-en); font-style: italic; font-size: 18px;
+    }
+    .section-title {
+      font-family: var(--font-en); font-weight: 300;
+      font-size: clamp(48px, 6vw, 96px);
+      line-height: 0.95; letter-spacing: -0.03em;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+
+    .overview-body {
+      font-family: var(--font-jp);
+      font-size: 16px; line-height: 2;
+      color: var(--gray-700);
+    }
+    .overview-body p + p { margin-top: 20px; }
+    .overview-body .pull {
+      font-size: clamp(20px, 1.6vw, 26px);
+      color: var(--paper);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+    .overview-body .pull .em { color: var(--green); }
+
+    .problems {
+      padding: 160px 48px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .problems-head { max-width: 1600px; margin: 0 auto 80px; }
+    .problems-head .section-tag { color: var(--green-2); }
+    .problems-head .section-title em { color: var(--green-2); }
+
+    .problems-grid {
+      max-width: 1600px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .problem {
+      border: 1px solid var(--rule-light);
+      padding: 36px 32px;
+      background: var(--paper-2);
+      position: relative;
+    }
+    .problem-num {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 32px; color: var(--green-2);
+      margin-bottom: 24px;
+    }
+    .problem-title {
+      font-family: var(--font-jp); font-weight: 700;
+      font-size: 20px; line-height: 1.5;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+    .problem-body {
+      font-family: var(--font-jp);
+      font-size: 14px; line-height: 1.85;
+      color: var(--gray-500);
+    }
+
+    .process {
+      padding: 160px 48px;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    .process-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 40% at 30% 50%, rgba(63,227,140,0.12), transparent 60%);
+      z-index: 0;
+    }
+    .process-inner {
+      position: relative; z-index: 1;
+      max-width: 1600px; margin: 0 auto;
+    }
+    .process-head { margin-bottom: 80px; }
+
+    .step-list { border-top: 1px solid var(--rule); }
+    .step {
+      display: grid;
+      grid-template-columns: 100px 240px 1fr 200px;
+      gap: 60px; align-items: flex-start;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      transition: padding-left 0.5s cubic-bezier(0.65,0,0.35,1);
+    }
+    .step:hover { padding-left: 16px; }
+    .step-num {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 56px; color: var(--green);
+      line-height: 1;
+    }
+    .step-name {
+      font-family: var(--font-jp); font-weight: 700;
+      font-size: clamp(22px, 2vw, 28px);
+      line-height: 1.4;
+    }
+    .step-name .en {
+      display: block;
+      font-family: var(--font-en); font-style: italic;
+      font-size: 14px; color: var(--green);
+      margin-top: 6px;
+    }
+    .step-body {
+      font-family: var(--font-jp);
+      font-size: 15px; line-height: 1.85;
+      color: var(--gray-700);
+    }
+    .step-meta {
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.16em;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .step-meta strong {
+      display: block; margin-bottom: 6px;
+      color: var(--paper); font-weight: 500;
+    }
+
+    .deliverables {
+      padding: 160px 48px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .deliverables-head { max-width: 1600px; margin: 0 auto 80px; }
+    .deliverables-head .section-tag { color: var(--green-2); }
+    .deliverables-head .section-title em { color: var(--green-2); }
+
+    .deliverables-grid {
+      max-width: 1600px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .deliverable {
+      padding: 40px;
+      background: var(--paper-2);
+      border: 1px solid var(--rule-light);
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .deliverable-num {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 32px; color: var(--green-2);
+    }
+    .deliverable-title {
+      font-family: var(--font-jp); font-weight: 700;
+      font-size: 20px; line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .deliverable-body {
+      font-family: var(--font-jp);
+      font-size: 14px; line-height: 1.85;
+      color: var(--gray-500);
+    }
+
+    .pricing {
+      padding: 160px 48px;
+      background: var(--ink-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-bg {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-en); font-style: italic;
+      font-size: clamp(180px, 26vw, 480px);
+      color: rgba(63,227,140,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.05em;
+    }
+    .pricing-inner {
+      position: relative; z-index: 1;
+      max-width: 1600px; margin: 0 auto;
+    }
+    .pricing-head { margin-bottom: 80px; }
+
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .plan {
+      padding: 48px 36px;
+      border: 1px solid var(--rule);
+      background: var(--ink);
+      position: relative;
+    }
+    .plan.featured {
+      border-color: var(--green);
+      background: linear-gradient(180deg, rgba(63,227,140,0.08), rgba(63,227,140,0.02));
+    }
+    .plan-badge {
+      position: absolute;
+      top: -10px; right: 24px;
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.2em;
+      color: var(--ink);
+      background: var(--green);
+      padding: 6px 14px;
+      text-transform: uppercase;
+    }
+    .plan-name {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 18px; color: var(--green);
+      margin-bottom: 8px;
+    }
+    .plan-jp {
+      font-family: var(--font-jp); font-weight: 700;
+      font-size: 24px; margin-bottom: 36px;
+      letter-spacing: 0.02em;
+    }
+    .plan-price {
+      font-family: var(--font-en); font-weight: 300;
+      font-size: clamp(56px, 5vw, 80px);
+      line-height: 0.95; letter-spacing: -0.03em;
+      color: var(--paper);
+      margin-bottom: 4px;
+    }
+    .plan-price .unit {
+      font-style: normal;
+      font-family: var(--font-jp);
+      font-size: 0.3em;
+      color: var(--gray-600);
+      vertical-align: 0.4em;
+      margin-left: 8px;
+      letter-spacing: 0;
+    }
+    .plan-period {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.16em; color: var(--gray-600);
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+    .plan-features {
+      list-style: none;
+      border-top: 1px solid var(--rule);
+      padding-top: 28px;
+    }
+    .plan-features li {
+      font-family: var(--font-jp);
+      font-size: 14px; line-height: 1.7;
+      color: var(--gray-700);
+      padding: 10px 0;
+      display: flex; gap: 10px;
+    }
+    .plan-features li::before {
+      content: '✦';
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .faq {
+      padding: 160px 48px;
+      background: var(--ink);
+      border-top: 1px solid var(--rule);
+    }
+    .faq-inner { max-width: 1100px; margin: 0 auto; }
+    .faq-head { text-align: center; margin-bottom: 80px; }
+    .faq-head .section-tag { justify-content: center; }
+    .faq-list { border-top: 1px solid var(--rule); }
+    .faq-item {
+      border-bottom: 1px solid var(--rule);
+      padding: 32px 0;
+    }
+    .faq-q {
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 32px;
+      font-family: var(--font-jp); font-weight: 600;
+      font-size: clamp(16px, 1.4vw, 20px);
+      line-height: 1.6;
+      color: var(--paper);
+    }
+    .faq-q .marker {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 22px; color: var(--green);
+      flex-shrink: 0;
+      transition: transform 0.4s;
+    }
+    .faq-item.open .faq-q .marker { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.65,0,0.35,1);
+    }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner {
+      padding-top: 20px;
+      font-family: var(--font-jp);
+      font-size: 15px; line-height: 1.85;
+      color: var(--gray-700);
+    }
+
+    .cta {
+      padding: 200px 48px;
+      background: var(--paper);
+      color: var(--ink);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-eyebrow {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.2em; color: var(--green-2);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .cta-title {
+      font-family: var(--font-en); font-weight: 300;
+      font-size: clamp(64px, 10vw, 160px);
+      line-height: 0.9; letter-spacing: -0.04em;
+      margin-bottom: 60px;
+    }
+    .cta-title em { font-style: italic; color: var(--green-2); }
+    .cta-jp {
+      font-family: var(--font-jp);
+      font-size: 18px; color: var(--gray-500);
+      margin-bottom: 60px;
+    }
+    .cta-actions {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 14px;
+      padding: 20px 32px;
+      background: var(--ink); color: var(--paper);
+      text-decoration: none;
+      font-family: var(--font-mono); font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      border-radius: 999px;
+      transition: transform 0.4s, background 0.4s;
+    }
+    .cta-btn:hover { transform: translateY(-3px); background: var(--green-2); }
+    .cta-btn.outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+    .cta-btn.outline:hover { background: var(--ink); color: var(--paper); }
+
+    .other {
+      padding: 160px 48px;
+      background: var(--ink);
+      border-top: 1px solid var(--rule);
+    }
+    .other-head { max-width: 1600px; margin: 0 auto 60px; }
+    .other-grid {
+      max-width: 1600px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .other-card {
+      padding: 36px;
+      border: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background 0.5s, border-color 0.5s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .other-card:hover { background: var(--ink-2); border-color: var(--green); }
+    .other-card-num {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 24px; color: var(--green);
+      margin-bottom: 24px;
+    }
+    .other-card-title {
+      font-family: var(--font-jp); font-weight: 700;
+      font-size: 24px; margin-bottom: 8px;
+    }
+    .other-card-en {
+      font-family: var(--font-en); font-style: italic;
+      font-size: 14px; color: var(--gray-600);
+      margin-bottom: 20px;
+    }
+    .other-card-body {
+      font-family: var(--font-jp);
+      font-size: 13px; line-height: 1.8;
+      color: var(--gray-700);
+      margin-bottom: 24px;
+    }
+    .other-card-cta {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--paper);
+      display: flex; justify-content: space-between;
+    }
+    .other-card-cta-arrow { color: var(--green); }
+
+    .footer {
+      padding: 80px 48px 48px;
+      background: var(--ink);
+      border-top: 1px solid var(--rule);
+    }
+    .footer-inner {
+      max-width: 1600px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.18em; color: var(--gray-600);
+      text-transform: uppercase;
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.65,0,0.35,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    .service-page { display: none; }
+    .service-page.active { display: block; }
+
+    @media (max-width: 900px) {
+      .nav { padding: 20px 24px; }
+      .tabs { padding: 80px 16px 16px; }
+      .tab { font-size: 10px; padding: 8px 12px; }
+      .hero { padding: 60px 24px 80px; }
+      .hero-bottom { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .overview { padding: 80px 24px; }
+      .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+      .problems { padding: 80px 24px; }
+      .problems-grid { grid-template-columns: 1fr; }
+      .process { padding: 80px 24px; }
+      .step { grid-template-columns: 60px 1fr; gap: 16px; padding: 32px 0; }
+      .step-meta, .step-body { display: none; }
+      .deliverables { padding: 80px 24px; }
+      .deliverables-grid { grid-template-columns: 1fr; }
+      .deliverable { padding: 24px; grid-template-columns: 40px 1fr; gap: 16px; }
+      .pricing { padding: 80px 24px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .faq { padding: 80px 24px; }
+      .cta { padding: 100px 24px; }
+      .other { padding: 80px 24px; }
+      .other-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit"><img src="assets/reqs-logo.png" alt="" class="brand-glyph" />REQS<span class="dot">.</span></a>
+    <a href="index.html#services" class="nav-back">
+      <span>←</span><span>Back to Services</span>
+    </a>
+  </nav>
+
+  <div class="tabs">
+    <a href="#service-1" class="tab" data-tab="1"><span class="num">A.01</span><span>AX Diagnosis</span></a>
+    <a href="#service-2" class="tab" data-tab="2"><span class="num">A.02</span><span>In-house AI Install</span></a>
+    <a href="#service-3" class="tab" data-tab="3"><span class="num">A.03</span><span>Automation</span></a>
+    <a href="#service-4" class="tab" data-tab="4"><span class="num">A.04</span><span>Enablement</span></a>
+    <a href="#service-5" class="tab" data-tab="5"><span class="num">B.01</span><span>Web Marketing</span></a>
+  </div>
+
+  <!-- ============ SERVICE 1: AX DIAGNOSIS ============ -->
+  <div class="service-page" data-page="1">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <div>Service N°01 / Phase 1</div>
+          <div>Diagnose → Roadmap</div>
+        </div>
+        <div class="hero-eyebrow">
+          <span class="line"></span>
+          <span>Service 01 / 知る</span>
+        </div>
+        <h1 class="hero-title">
+          AX <span class="it">Diagnosis</span><span style="color:var(--green);font-style:normal">.</span>
+        </h1>
+        <p class="hero-jp">
+          ITポートフォリオ・業務プロセス・組織構造を診断し、<span class="em">AI導入・DX戦略のロードマップを明確化</span>する。100以上のツールから最適なものを選定。
+        </p>
+        <div class="hero-bottom">
+          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">4 — 6週間</div></div>
+          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">診断書 + ロードマップ</div></div>
+          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">Lead × 1, Analyst × 2</div></div>
+          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥1,800,000</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview">
+      <div class="section-num">§ 01.1 / Overview</div>
+      <div class="overview-grid">
+        <div class="reveal">
+          <div class="section-tag">Overview</div>
+          <h2 class="section-title">まず、<em>現在地</em>を<br/>正確に知る。</h2>
+        </div>
+        <div class="overview-body reveal">
+          <p class="pull">AI導入で最も多い失敗は、<span class="em">「自社の現在地を知らないまま、流行のツールを入れること」</span>です。</p>
+          <p>REQSのAX診断は、ITポートフォリオ・業務プロセス・組織構造・データ基盤の4軸でクライアントの現在地を解像度高く把握し、AI活用の「効く順番」を提示します。</p>
+          <p>診断書は単なるレポートではなく、「成果診断・ギャップ分析・テクノロジーロードマップ・コスト予測」の4要素から構成され、6/12/24ヶ月後の未来像と、そこに至る道筋を明確化します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="problems">
+      <div class="problems-head reveal">
+        <div class="section-tag">Pain Points</div>
+        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+      </div>
+      <div class="problems-grid">
+        <div class="problem reveal">
+          <div class="problem-num">01</div>
+          <h3 class="problem-title">何から手をつければ良いか分からない</h3>
+          <p class="problem-body">「AI導入が大事」とは聞くものの、自社のどこから始めるべきか、社内で議論が空転している。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">02</div>
+          <h3 class="problem-title">PoCで終わってしまう</h3>
+          <p class="problem-body">いくつかのAIツールを試したが、現場に定着せずプロジェクトが立ち消えになった経験がある。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">03</div>
+          <h3 class="problem-title">ツールが多すぎて選べない</h3>
+          <p class="problem-body">毎週新しいAIツールが出てきて、自社にとって最適な選択がわからない。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-bg"></div>
+      <div class="process-inner">
+        <div class="process-head reveal">
+          <div class="section-tag">Process</div>
+          <h2 class="section-title">4週間の<em>診断フロー。</em></h2>
+        </div>
+        <div class="step-list">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <div class="step-name">キックオフ／ヒアリング<span class="en">— Kickoff & Interview</span></div>
+            <div class="step-body">経営層・部門長・現場担当者へのヒアリング、組織図・業務フロー・ITポートフォリオの読み込み。</div>
+            <div class="step-meta"><strong>Week 1</strong>5 営業日</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <div class="step-name">業務 × データ診断<span class="en">— Process & Data Audit</span></div>
+            <div class="step-body">主要業務の所要時間・摩擦点の定量分析。データの所在・品質・連携状態を診断。</div>
+            <div class="step-meta"><strong>Week 2</strong>5 営業日</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03</div>
+            <div class="step-name">ツール選定／優先順位設計<span class="en">— Tool Mapping</span></div>
+            <div class="step-body">100以上のAIツール・SaaSから自社に最適な10〜15個を選定。導入順とROI試算を提示。</div>
+            <div class="step-meta"><strong>Week 3</strong>5 営業日</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">04</div>
+            <div class="step-name">診断書 / ロードマップ提出<span class="en">— Deliverables</span></div>
+            <div class="step-body">経営層向けプレゼン資料・現場向けマニュアル・24ヶ月のロードマップを納品。</div>
+            <div class="step-meta"><strong>Week 4</strong>5 営業日</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deliverables">
+      <div class="deliverables-head reveal">
+        <div class="section-tag">Deliverables</div>
+        <h2 class="section-title">4 つの<em>納品物。</em></h2>
+      </div>
+      <div class="deliverables-grid">
+        <div class="deliverable reveal"><div class="deliverable-num">01</div><div><h4 class="deliverable-title">成果診断レポート</h4><p class="deliverable-body">現状の業務・ITポートフォリオの定量分析と、AI活用ポテンシャルのスコアリング。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">02</div><div><h4 class="deliverable-title">ギャップ分析</h4><p class="deliverable-body">理想像と現状の差分を業務単位・組織単位で可視化したマトリクス。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">03</div><div><h4 class="deliverable-title">テクノロジーロードマップ</h4><p class="deliverable-body">フェーズ別の施策・期待効果・必要リソースを時系列で示した24ヶ月のガントチャート。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">コスト予測 / ROI試算</h4><p class="deliverable-body">投資・運用コストと期待ROIの3年シミュレーション。経営判断用資料。</p></div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ SERVICE 2: IN-HOUSE AI INSTALL ============ -->
+  <div class="service-page" data-page="2">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <div>Service N°02 / Phase 2</div>
+          <div>Install → Govern → Localize</div>
+        </div>
+        <div class="hero-eyebrow">
+          <span class="line"></span>
+          <span>Service 02 / 始める</span>
+        </div>
+        <h1 class="hero-title">
+          In-house <span class="it">AI Install</span><span style="color:var(--green);font-style:normal">.</span>
+        </h1>
+        <p class="hero-jp">
+          安全なAIを社内導入し、<span class="em">社員一人当たりの負担を削減</span>する。AI選定・ガイドライン策定・ローカルLLM構築までを一気通貫で支援。
+        </p>
+        <div class="hero-bottom">
+          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">2 — 4ヶ月</div></div>
+          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">社内AI基盤 + 運用ルール</div></div>
+          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Eng × 2</div></div>
+          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥3,000,000</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview">
+      <div class="section-num">§ 02.1 / Overview</div>
+      <div class="overview-grid">
+        <div class="reveal">
+          <div class="section-tag">Overview</div>
+          <h2 class="section-title">安全に、<em>社内</em>から<br/>AIを始める。</h2>
+        </div>
+        <div class="overview-body reveal">
+          <p class="pull">「とりあえずChatGPTを使ってみた」では、<span class="em">セキュリティ・コスト・定着のすべてが中途半端</span>になります。</p>
+          <p>REQSの社内AI導入は、貴社の業務要件に最適なAIモデルを比較・検討し、ガイドラインの策定と効果計測の仕組みづくり、必要に応じてローカルLLMの構築までを一貫して支援します。</p>
+          <p>クラウドAIだけでなく、機密情報を扱う業務にはローカルLLM(REQS LLM)を併用するハイブリッド構成も選択可能。社員の負担を削減しながら、情報漏洩リスクを最小化します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="problems">
+      <div class="problems-head reveal">
+        <div class="section-tag">Pain Points</div>
+        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+      </div>
+      <div class="problems-grid">
+        <div class="problem reveal">
+          <div class="problem-num">01</div>
+          <h3 class="problem-title">情報漏洩リスクが心配</h3>
+          <p class="problem-body">クラウドAIに機密情報を入れていいのか、社内ガイドラインも整備されておらず使用を制限している。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">02</div>
+          <h3 class="problem-title">どのAIを選べばいいか分からない</h3>
+          <p class="problem-body">ChatGPT・Claude・Gemini・ローカルLLM…選択肢が多すぎて、自社に合うものを比較できない。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">03</div>
+          <h3 class="problem-title">導入したのに使われない</h3>
+          <p class="problem-body">ライセンスは契約したが、活用度が見えず、効果も測れない。形骸化しつつある。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-bg"></div>
+      <div class="process-inner">
+        <div class="process-head reveal">
+          <div class="section-tag">Process</div>
+          <h2 class="section-title">3ステップの<em>導入フロー。</em></h2>
+        </div>
+        <div class="step-list">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <div class="step-name">AI選定<span class="en">— Model Selection</span></div>
+            <div class="step-body">要件ヒアリング → AIモデル比較・検討 → 評価・スコアリング → 推奨AIのご提案 → 導入支援。クラウド/ローカルを横断して比較。</div>
+            <div class="step-meta"><strong>Phase 1</strong>3 — 4週間</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <div class="step-name">ガイドライン策定 & 効果計測<span class="en">— Governance & KPI</span></div>
+            <div class="step-body">利用ルール・禁止事項・注意点を明文化。KPI設計とダッシュボードで活用状況を可視化、継続的な改善サイクルを回す。</div>
+            <div class="step-meta"><strong>Phase 2</strong>2 — 3週間</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03</div>
+            <div class="step-name">ローカルLLM構築<span class="en">— Local LLM (Optional)</span></div>
+            <div class="step-body">機密情報を扱う業務向けに、社内ネットワーク内で完結するREQS LLMを構築。クラウドと併用するハイブリッド運用も可。</div>
+            <div class="step-meta"><strong>Phase 3</strong>4 — 8週間</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deliverables">
+      <div class="deliverables-head reveal">
+        <div class="section-tag">Deliverables</div>
+        <h2 class="section-title">主な<em>納品物。</em></h2>
+      </div>
+      <div class="deliverables-grid">
+        <div class="deliverable reveal"><div class="deliverable-num">01</div><div><h4 class="deliverable-title">AI選定レポート</h4><p class="deliverable-body">クラウド/ローカルAIの比較表、評価軸別のスコアリング、推奨構成と導入手順。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">02</div><div><h4 class="deliverable-title">利用ガイドライン</h4><p class="deliverable-body">情報の取扱い・禁止事項・著作権・社内承認フローをまとめた運用ルール集。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">03</div><div><h4 class="deliverable-title">効果計測ダッシュボード</h4><p class="deliverable-body">利用状況・成果・コストを可視化するKPIダッシュボードと月次レポート設計。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">ローカルLLM環境 (任意)</h4><p class="deliverable-body">GPUサーバー設計・REQS LLMセットアップ・社内ネットワーク連携・運用マニュアル。</p></div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ SERVICE 3: AUTOMATION ============ -->
+  <div class="service-page" data-page="3">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <div>Service N°A.03 / Pillar AX</div>
+          <div>Implement → Integrate → Agent</div>
+        </div>
+        <div class="hero-eyebrow">
+          <span class="line"></span>
+          <span>Service A.03 / 変える</span>
+        </div>
+        <h1 class="hero-title">
+          Workflow <span class="it">Automation</span><span style="color:var(--green);font-style:normal">.</span>
+        </h1>
+        <p class="hero-jp">
+          実際のプロセスにAIを連携し、<span class="em">業務効率化を実現</span>する。Webアプリ開発・DB統合・自動化に加え、<span class="em">AIエージェント</span>という選択肢も。
+        </p>
+        <div class="hero-bottom">
+          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">2 — 6ヶ月</div></div>
+          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">稼働するAXシステム</div></div>
+          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Eng × 2-4</div></div>
+          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥4,500,000</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview">
+      <div class="section-num">§ 03.1 / Overview</div>
+      <div class="overview-grid">
+        <div class="reveal">
+          <div class="section-tag">Overview</div>
+          <h2 class="section-title">業務に、<em>AI</em>を<br/>溶け込ませる。</h2>
+        </div>
+        <div class="overview-body reveal">
+          <p class="pull">AIを<span class="em">「ツールではなく業務の一部」</span>にする。それが業務AXの目的です。</p>
+          <p>既存業務にAIを組み込むには、業務理解・ツール選定・統合設計・運用設計の4つを同時に解く必要があります。REQSは内製エンジニアと一緒に、これらを一気通貫で実装します。</p>
+          <p>既存のSaaS、社内DB、コミュニケーションツール、AIモデル — それらを"配管"でつなぎ、現場が違和感なく使えるフローを構築します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="problems">
+      <div class="problems-head reveal">
+        <div class="section-tag">Pain Points</div>
+        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+      </div>
+      <div class="problems-grid">
+        <div class="problem reveal">
+          <div class="problem-num">01</div>
+          <h3 class="problem-title">PoCから本番運用に進めない</h3>
+          <p class="problem-body">AIの効果は確認できたが、本番環境への組み込みやデータ連携の設計でつまづいている。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">02</div>
+          <h3 class="problem-title">データがバラバラに散在している</h3>
+          <p class="problem-body">スプレッドシート・SaaS・社内DB・チャットに情報が分散し、AIに食わせる準備ができない。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">03</div>
+          <h3 class="problem-title">使い慣れた業務フローを壊したくない</h3>
+          <p class="problem-body">現場が抵抗なく使える形でAIを組み込みたいが、設計の勘所がわからない。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-bg"></div>
+      <div class="process-inner">
+        <div class="process-head reveal">
+          <div class="section-tag">Process</div>
+          <h2 class="section-title">5ステップの<em>実装フロー。</em></h2>
+        </div>
+        <div class="step-list">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <div class="step-name">業務再設計<span class="en">— Process Re-design</span></div>
+            <div class="step-body">As-Is業務を解体し、AI前提のTo-Beフローに再構成。摩擦点と価値創出点を可視化。</div>
+            <div class="step-meta"><strong>Phase 1</strong>2 — 4週間</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <div class="step-name">アーキテクチャ設計<span class="en">— Architecture</span></div>
+            <div class="step-body">AI・SaaS・既存DBの統合方針を設計。セキュリティ要件・運用コストを確定。</div>
+            <div class="step-meta"><strong>Phase 2</strong>2 — 3週間</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03</div>
+            <div class="step-name">プロトタイプ開発<span class="en">— Prototype</span></div>
+            <div class="step-body">2〜3週間で最小機能を実装し、現場ユーザーにテスト。フィードバックで設計を微調整。</div>
+            <div class="step-meta"><strong>Phase 3</strong>3 — 4週間</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">04</div>
+            <div class="step-name">本番実装<span class="en">— Production Build</span></div>
+            <div class="step-body">プロトタイプをスケール可能な本番システムへ。テスト・セキュリティレビュー込み。</div>
+            <div class="step-meta"><strong>Phase 4</strong>4 — 8週間</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">05</div>
+            <div class="step-name">運用引き継ぎ<span class="en">— Hand-off</span></div>
+            <div class="step-body">運用マニュアル・SOP整備。社内エンジニアへのナレッジ移管と保守契約への移行。</div>
+            <div class="step-meta"><strong>Phase 5</strong>2 — 3週間</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deliverables">
+      <div class="deliverables-head reveal">
+        <div class="section-tag">Deliverables</div>
+        <h2 class="section-title">主な<em>納品物。</em></h2>
+      </div>
+      <div class="deliverables-grid">
+        <div class="deliverable reveal"><div class="deliverable-num">01</div><div><h4 class="deliverable-title">業務AXシステム本体</h4><p class="deliverable-body">AI連携の自動化フロー、社内Webアプリ、SaaS連携設定を含む稼働システム。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">02</div><div><h4 class="deliverable-title">DB / データ基盤</h4><p class="deliverable-body">分散していた社内データを統合・正規化したDBおよびETLパイプライン。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">03</div><div><h4 class="deliverable-title">運用マニュアル / SOP</h4><p class="deliverable-body">日次・週次・月次のオペレーションを誰でも実行できる形にまとめた手順書。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">KPI ダッシュボード</h4><p class="deliverable-body">投資対効果を継続的にトラッキングするためのダッシュボードと月次レポート設計。</p></div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ SERVICE 4: ENABLEMENT ============ -->
+  <div class="service-page" data-page="4">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <div>Service N°04 / Phase 4</div>
+          <div>Train → Embed → Internalize</div>
+        </div>
+        <div class="hero-eyebrow">
+          <span class="line"></span>
+          <span>Service 04 / 育てる</span>
+        </div>
+        <h1 class="hero-title">
+          AI <span class="it">Enablement</span><span style="color:var(--green);font-style:normal">.</span>
+        </h1>
+        <p class="hero-jp">
+          持続可能なAI環境を<span class="em">社内から醸成</span>する。6ヶ月の伴走で、外注に依存しない自走チームを立ち上げる。
+        </p>
+        <div class="hero-bottom">
+          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">6ヶ月</div></div>
+          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">自走できる組織</div></div>
+          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">Lead × 1, Coach × 1-2</div></div>
+          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥3,200,000</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview">
+      <div class="section-num">§ 04.1 / Overview</div>
+      <div class="overview-grid">
+        <div class="reveal">
+          <div class="section-tag">Overview</div>
+          <h2 class="section-title">外注ではなく、<br/><em>内製化</em>へ。</h2>
+        </div>
+        <div class="overview-body reveal">
+          <p class="pull">AIを使うには、技術ではなく<span class="em">「使いこなせる人材と文化」</span>が要ります。</p>
+          <p>REQSのAI定着支援は、6ヶ月でクライアント社内に「AIを自走できるチーム」を立ち上げるプログラムです。研修・伴走・内製化を組み合わせ、外注依存しない組織をつくります。</p>
+          <p>技術的な研修だけでなく、社内のキーパーソン発掘、評価制度の改訂、社内コミュニティ運営まで踏み込みます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="problems">
+      <div class="problems-head reveal">
+        <div class="section-tag">Pain Points</div>
+        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+      </div>
+      <div class="problems-grid">
+        <div class="problem reveal">
+          <div class="problem-num">01</div>
+          <h3 class="problem-title">外注に依存し続けてしまう</h3>
+          <p class="problem-body">AIプロジェクトの度に外注が必要で、スピードもコストも上がってしまう。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">02</div>
+          <h3 class="problem-title">研修だけでは現場が変わらない</h3>
+          <p class="problem-body">e-learningや一日研修を実施したが、現場での活用は進んでいない。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">03</div>
+          <h3 class="problem-title">推進担当者が孤独に戦っている</h3>
+          <p class="problem-body">DX推進担当者がアサインされたが、社内の理解や仲間が足りず疲弊している。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-bg"></div>
+      <div class="process-inner">
+        <div class="process-head reveal">
+          <div class="section-tag">Process</div>
+          <h2 class="section-title">3フェーズの<em>定着プログラム。</em></h2>
+        </div>
+        <div class="step-list">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <div class="step-name">設計／ Foundation<span class="en">— Foundation Phase</span></div>
+            <div class="step-body">推進体制の設計、評価制度との接続、社内向けナラティブ設計、キーパーソン発掘。</div>
+            <div class="step-meta"><strong>Month 1 — 2</strong>2ヶ月</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <div class="step-name">定着／ Embedding<span class="en">— Embedding Phase</span></div>
+            <div class="step-body">職種別ワークショップ、伴走実装、社内事例の発信、月次の進捗レビュー。</div>
+            <div class="step-meta"><strong>Month 3 — 4</strong>2ヶ月</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">03</div>
+            <div class="step-name">内製化／ Internalization<span class="en">— Internalization Phase</span></div>
+            <div class="step-body">社内コミュニティ運営、ガバナンス整備、移管計画、卒業後のサポート設計。</div>
+            <div class="step-meta"><strong>Month 5 — 6</strong>2ヶ月</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deliverables">
+      <div class="deliverables-head reveal">
+        <div class="section-tag">Deliverables</div>
+        <h2 class="section-title">主な<em>納品物。</em></h2>
+      </div>
+      <div class="deliverables-grid">
+        <div class="deliverable reveal"><div class="deliverable-num">01</div><div><h4 class="deliverable-title">AI推進体制 / 役割定義</h4><p class="deliverable-body">推進責任者・キーパーソン・現場リーダーの役割と権限を明文化した体制図。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">02</div><div><h4 class="deliverable-title">職種別 研修プログラム</h4><p class="deliverable-body">経営層・管理職・実務担当に分けた、6ヶ月の研修コンテンツ一式。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">03</div><div><h4 class="deliverable-title">社内コミュニティ / ナレッジ基盤</h4><p class="deliverable-body">事例共有・質問対応・新ツール紹介を回す社内Slack / Notionの設計と運用。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">ガバナンス / リスクガイドライン</h4><p class="deliverable-body">情報漏洩・著作権・偏りなどのリスクに対する社内ガイドラインと運用ルール。</p></div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ SERVICE 5: WEB MARKETING (AIBPO) ============ -->
+  <div class="service-page" data-page="5">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <div>Service N°B.01 / Pillar AIBPO</div>
+          <div>Outsource → Operate → Optimize</div>
+        </div>
+        <div class="hero-eyebrow">
+          <span class="line"></span>
+          <span>Service B.01 / 任せる</span>
+        </div>
+        <h1 class="hero-title">
+          Web <span class="it">Marketing</span><span style="color:var(--green);font-style:normal">.</span>
+        </h1>
+        <p class="hero-jp">
+          AIを活かした<span class="em">集客の仕組みを業務代行</span>で構築・運用する。SNS運用と広告運用を中核に、再現性のある成果を届ける。
+        </p>
+        <div class="hero-bottom">
+          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">3ヶ月〜 / 月額制</div></div>
+          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">運用代行 + 月次レポート</div></div>
+          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Operator × 2</div></div>
+          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥600,000 / 月</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview">
+      <div class="section-num">§ B.01.1 / Overview</div>
+      <div class="overview-grid">
+        <div class="reveal">
+          <div class="section-tag">Overview</div>
+          <h2 class="section-title">集客は、<em>任せる</em>時代へ。</h2>
+        </div>
+        <div class="overview-body reveal">
+          <p class="pull">マーケティングの実行リソースを<span class="em">「自社で抱えない」</span>選択肢を、AIで現実的にする。</p>
+          <p>SNSの企画・制作・運用、広告のクリエイティブ・配信・改善まで。AI＋人のハイブリッドオペレーションで、社内に専門人材がいなくても継続的に成果を出します。</p>
+          <p>毎月のKPIレビューと打ち手提案をセットでお届け。広告費の最適配分、コンテンツテーマの戦略立案までREQS側でリードします。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="problems">
+      <div class="problems-head reveal">
+        <div class="section-tag">Pain Points</div>
+        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+      </div>
+      <div class="problems-grid">
+        <div class="problem reveal">
+          <div class="problem-num">01</div>
+          <h3 class="problem-title">マーケ人材を採用できない</h3>
+          <p class="problem-body">SNS担当・広告運用担当の採用が難しく、外注すると企画から都度コミュニケーションが必要で疲弊している。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">02</div>
+          <h3 class="problem-title">運用が止まり、成果が続かない</h3>
+          <p class="problem-body">投稿頻度や広告改善が止まり、せっかくの予算とチャネルが活かせていない。</p>
+        </div>
+        <div class="problem reveal">
+          <div class="problem-num">03</div>
+          <h3 class="problem-title">レポートを見ても次の打ち手が出ない</h3>
+          <p class="problem-body">数字は届くが、何を直せば成果が出るのか、戦略レイヤーの提案がもらえない。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-bg"></div>
+      <div class="process-inner">
+        <div class="process-head reveal">
+          <div class="section-tag">Service Menu</div>
+          <h2 class="section-title">2 つの<em>運用代行サービス。</em></h2>
+        </div>
+        <div class="step-list">
+          <div class="step reveal">
+            <div class="step-num">01</div>
+            <div class="step-name">SNS運用代行<span class="en">— SNS Operation</span></div>
+            <div class="step-body">企画立案・コンテンツ制作・投稿・コミュニティ運営・分析レポートまで一気通貫。X / Instagram / LinkedIn / Note 等に対応。AIで制作量と速度を担保。</div>
+            <div class="step-meta"><strong>Plan A</strong>月額 ¥400,000〜</div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">02</div>
+            <div class="step-name">広告運用代行<span class="en">— Paid Ads Operation</span></div>
+            <div class="step-body">Google / Meta / TikTok / LinkedIn 広告のクリエイティブ制作・配信設計・予算最適化・レポーティング。AI生成バナー＋ABテストで改善サイクルを高速化。</div>
+            <div class="step-meta"><strong>Plan B</strong>月額 ¥400,000〜<br/>+ 広告費 20%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deliverables">
+      <div class="deliverables-head reveal">
+        <div class="section-tag">Deliverables</div>
+        <h2 class="section-title">毎月の<em>納品物。</em></h2>
+      </div>
+      <div class="deliverables-grid">
+        <div class="deliverable reveal"><div class="deliverable-num">01</div><div><h4 class="deliverable-title">月次マーケ戦略書</h4><p class="deliverable-body">月次の重点テーマ・KPI目標・打ち手の優先順位を提示する戦略ドキュメント。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">02</div><div><h4 class="deliverable-title">SNS / 広告クリエイティブ</h4><p class="deliverable-body">投稿コンテンツ、広告バナー、動画アセット、コピー集を月次で制作・納品。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">03</div><div><h4 class="deliverable-title">月次レポート + 打ち手提案</h4><p class="deliverable-body">主要KPIの推移、勝ちパターン分析、来月のアクションプランをセットで報告。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">運用ダッシュボード</h4><p class="deliverable-body">SNS / 広告 / 流入指標を一元化したリアルタイム可視化ダッシュボード。</p></div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ SHARED: PRICING ============ -->
+  <section class="pricing">
+    <div class="pricing-bg"><em>plans</em></div>
+    <div class="pricing-inner">
+      <div class="pricing-head reveal">
+        <div class="section-tag">Plans & Pricing</div>
+        <h2 class="section-title">3つの<em>導入プラン。</em></h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan reveal">
+          <div class="plan-name italic">Starter</div>
+          <div class="plan-jp">スターター</div>
+          <div class="plan-price">¥1.8M<span class="unit">〜</span></div>
+          <div class="plan-period">単発 / 4-6 週間</div>
+          <ul class="plan-features">
+            <li>AX診断のみ</li>
+            <li>診断書 + ロードマップ</li>
+            <li>キックオフ + 報告会</li>
+            <li>3社比較資料</li>
+          </ul>
+        </div>
+        <div class="plan featured reveal">
+          <div class="plan-badge">Recommended</div>
+          <div class="plan-name italic">Standard</div>
+          <div class="plan-jp">スタンダード</div>
+          <div class="plan-price">¥6M<span class="unit">〜</span></div>
+          <div class="plan-period">3-6ヶ月 / 単一プロジェクト</div>
+          <ul class="plan-features">
+            <li>AX診断 + 社内AI導入</li>
+            <li>業務AX 1領域実装</li>
+            <li>運用マニュアル / SOP</li>
+            <li>3ヶ月の運用伴走</li>
+            <li>月次KPIレビュー</li>
+          </ul>
+        </div>
+        <div class="plan reveal">
+          <div class="plan-name italic">Enterprise</div>
+          <div class="plan-jp">エンタープライズ</div>
+          <div class="plan-price">Custom</div>
+          <div class="plan-period">12ヶ月〜 / 年間契約</div>
+          <ul class="plan-features">
+            <li>4サービス フルスタック</li>
+            <li>定着支援 6ヶ月プログラム</li>
+            <li>ローカルLLM 構築</li>
+            <li>四半期戦略レビュー</li>
+            <li>専任パートナー1名</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="faq-inner">
+      <div class="faq-head reveal">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">よく<em>いただく質問。</em></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q"><span>1社に1人、専任の担当者がつきますか？</span><span class="marker">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">はい。Standard / Enterpriseプランでは、1社にPartner / Leadクラスのコンサルタントが専任でつきます。週次〜隔週で定例ミーティングを実施します。</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>社内にエンジニアがいなくても導入できますか？</span><span class="marker">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">可能です。業務AXは弊社エンジニアチームが実装まで対応します。定着支援フェーズで、運用に必要な人材育成を行います。</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>ローカルLLMの導入は必須ですか？</span><span class="marker">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">必須ではありません。クラウドAIのみで完結する場合も多く、機密性の高い業務がある場合のみローカルLLMをご提案します。要件に応じてハイブリッド構成も可能です。</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>PoCで終わらないという保証はありますか？</span><span class="marker">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">REQSは契約段階で「本番運用 / 内製化」をゴールに設定します。PoCで止まらないよう、初期段階から本番運用を見据えた設計と、段階的なスコープ管理を行います。</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>セキュリティ・コンプライアンス対応は？</span><span class="marker">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">ISMS / NDA等は標準対応。金融機関や医療機関向けには、業界固有の要件（個人情報保護・PCI DSS等）にも対応しています。</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-eyebrow">§ 05 — Get in Touch</div>
+    <h2 class="cta-title"><em>Translate</em><br/>your AI now.</h2>
+    <p class="cta-jp">まずは現状の解像度を上げるところから、はじめませんか。</p>
+    <div class="cta-actions">
+      <a href="#" class="cta-btn"><span>無料相談を予約</span><span>→</span></a>
+      <a href="#" class="cta-btn outline"><span>サービス資料DL</span><span>↓</span></a>
+    </div>
+  </section>
+
+  <!-- OTHER SERVICES -->
+  <section class="other">
+    <div class="other-head reveal">
+      <div class="section-tag">Other Services</div>
+      <h2 class="section-title">他の<em>サービス。</em></h2>
+    </div>
+    <div class="other-grid" id="otherGrid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 REQS. All rights reserved.</span>
+      <span>Translate AI into Reality.</span>
+    </div>
+  </footer>
+
+  <script>
+    const SERVICES = [
+      { id: '1', num: 'A.01', title: 'AX診断', en: 'AX Diagnosis — 知る', body: 'AI導入・DX戦略のロードマップを明確化。100以上のツールから最適選定。' },
+      { id: '2', num: 'A.02', title: '社内AI導入', en: 'In-house AI Install — 始める', body: '安全なAIを社内導入し、社員一人当たりの負担を削減。AI選定・ガイドライン・ローカルLLMまで。' },
+      { id: '3', num: 'A.03', title: '業務自動化', en: 'Automation — 変える', body: '実際のプロセスにAIを連携し業務効率化へ。Webアプリ・DB統合・自動化に加えAIエージェントも。' },
+      { id: '4', num: 'A.04', title: '定着支援', en: 'AI Enablement — 育てる', body: '持続可能なAI環境を社内から醸成。6ヶ月の伴走で外注依存しない自走チームを立ち上げる。' },
+      { id: '5', num: 'B.01', title: 'WEBマーケティング', en: 'Web Marketing — 任せる', body: 'AIを活かした集客の仕組みを業務代行で構築・運用。SNS運用と広告運用が中核。' },
+    ];
+
+    function showService(id) {
+      document.querySelectorAll('.service-page').forEach(p => {
+        p.classList.toggle('active', p.dataset.page === id);
+      });
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === id);
+      });
+      const grid = document.getElementById('otherGrid');
+      grid.innerHTML = '';
+      SERVICES.filter(s => s.id !== id).forEach(s => {
+        const a = document.createElement('a');
+        a.className = 'other-card';
+        a.href = '#service-' + s.id;
+        a.innerHTML = `
+          <div class="other-card-num">${s.num}</div>
+          <h4 class="other-card-title">${s.title}</h4>
+          <div class="other-card-en">${s.en}</div>
+          <p class="other-card-body">${s.body}</p>
+          <div class="other-card-cta">
+            <span>View Detail</span>
+            <span class="other-card-cta-arrow">→</span>
+          </div>
+        `;
+        grid.appendChild(a);
+      });
+      document.querySelectorAll('.reveal').forEach(el => el.classList.remove('in'));
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight) el.classList.add('in');
+        });
+      }, 50);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function getActiveFromHash() {
+      const m = location.hash.match(/^#service-(\d)/);
+      return m ? m[1] : '1';
+    }
+    window.addEventListener('hashchange', () => showService(getActiveFromHash()));
+    showService(getActiveFromHash());
+
+    // FAQ
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-q').addEventListener('click', () => item.classList.toggle('open'));
+    });
+
+    // Reveal observer
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
