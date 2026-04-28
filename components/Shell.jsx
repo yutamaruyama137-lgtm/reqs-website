@@ -2,32 +2,69 @@
 const { useState, useEffect } = React;
 
 window.Header = function Header({ currentPage, onNav }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const links = [
     { id: 'about', label: 'About', jp: '私たちについて' },
     { id: 'services', label: 'Services', jp: 'サービス' },
     { id: 'works', label: 'Works', jp: '事例' },
     { id: 'company', label: 'Company', jp: '会社情報' },
   ];
+
+  const handleNav = (id) => {
+    setMenuOpen(false);
+    onNav(id);
+  };
+
+  // Lock body scroll when menu open + Esc to close
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', menuOpen);
+    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.classList.remove('menu-open');
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
+
   return (
-    <header className="site-header">
-      <a href="#/" onClick={(e) => { e.preventDefault(); onNav('home'); }} className="brand-mark">
-        <img src="assets/reqs-logo.png" alt="" className="brand-logo-img" />
-        <span>REQS</span>
-      </a>
-      <nav className="nav-main">
+    <>
+      <header className="site-header">
+        <a href="#/" onClick={(e) => { e.preventDefault(); handleNav('home'); }} className="brand-mark">
+          <img src="assets/reqs-logo.png" alt="" className="brand-logo-img" />
+          <span>REQS</span>
+        </a>
+        <nav className="nav-main">
+          {links.map(l => (
+            <a key={l.id}
+               href={`#/${l.id}`}
+               onClick={(e) => { e.preventDefault(); handleNav(l.id); }}
+               className={currentPage === l.id ? 'active' : ''}>
+              {l.label}
+            </a>
+          ))}
+        </nav>
+        <a href="#/contact"
+           onClick={(e) => { e.preventDefault(); handleNav('contact'); }}
+           className="nav-cta">Contact →</a>
+        <button className="nav-toggle"
+                aria-label="メニューを開く"
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <div className={`mobile-menu-overlay ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(false)} />
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
         {links.map(l => (
-          <a key={l.id}
-             href={`#/${l.id}`}
-             onClick={(e) => { e.preventDefault(); onNav(l.id); }}
-             className={currentPage === l.id ? 'active' : ''}>
+          <a key={l.id} href={`#/${l.id}`} onClick={(e) => { e.preventDefault(); handleNav(l.id); }}>
             {l.label}
           </a>
         ))}
-      </nav>
-      <a href="#/contact"
-         onClick={(e) => { e.preventDefault(); onNav('contact'); }}
-         className="nav-cta">Contact →</a>
-    </header>
+        <a href="#/contact"
+           onClick={(e) => { e.preventDefault(); handleNav('contact'); }}
+           className="mobile-menu-cta">Contact →</a>
+      </div>
+    </>
   );
 };
 

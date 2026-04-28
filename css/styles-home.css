@@ -327,10 +327,78 @@
   .value-item { grid-template-columns: 50px 180px 1fr; }
   .value-body { grid-column: 1 / -1; padding-left: 90px; padding-top: 0; }
 }
+
 @media (max-width: 768px) {
-  .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
-  .service-row { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; margin-left: 0; }
-  .numbers-grid { grid-template-columns: 1fr; }
-  .value-item { grid-template-columns: 1fr; gap: 8px; }
-  .home-manifesto, .home-services, .home-numbers, .home-values, .home-cta { padding: 100px 0; }
+  /* Hero */
+  .home-hero { min-height: 90vh; min-height: 90dvh; padding: 100px 20px 60px; }
+  .hero-meta-tl, .hero-meta-tr { font-size: 9px; }
+  .hero-content { margin: auto 0; }
+  .hero-title { font-size: clamp(48px, 14vw, 88px) !important; line-height: 1 !important; }
+  .hero-en-sub { font-size: 14px !important; margin-top: 24px !important; }
+  .hero-scroll-cue { display: none; }
+  .hero-marquee { font-size: 10px; padding: 6px 0; }
+
+  /* Manifesto */
+  .home-manifesto { padding: 80px 0; }
+  .manifesto-grid { grid-template-columns: 1fr; gap: 32px; }
+  .manifesto-en-large { font-size: clamp(40px, 12vw, 80px) !important; }
+  .problem-block { grid-template-columns: 50px 1fr; gap: 16px; padding: 24px 0; }
+  .problem-num { font-size: 13px; }
+  .problem-jp { font-size: 18px; line-height: 1.4; }
+  .problem-body { font-size: 13px; line-height: 1.85; }
+  .mission-headline { font-size: clamp(28px, 8vw, 48px) !important; }
+
+  /* Services */
+  .home-services { padding: 80px 0; }
+  .services-header { padding: 0 20px 48px; }
+  .service-row {
+    grid-template-columns: 1fr; gap: 12px;
+    padding: 28px 0; margin-left: 0;
+  }
+  .service-num { font-size: 12px; }
+  .service-en em { font-size: 24px; }
+  .service-jp { font-size: 20px; }
+  .service-desc { font-size: 13px; line-height: 1.85; }
+
+  /* Numbers */
+  .home-numbers { padding: 80px 0; }
+  .numbers-header { padding: 0 20px 40px; }
+  .numbers-grid { grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 20px; }
+  .number-card { padding: 24px 16px; }
+  .num-val { font-size: clamp(32px, 10vw, 56px) !important; }
+  .num-label { font-size: 11px; }
+
+  /* Values */
+  .home-values { padding: 80px 0; }
+  .values-intro { padding: 0 20px 40px; }
+  .values-list { padding: 0 20px; }
+  .value-item {
+    grid-template-columns: 1fr; gap: 6px;
+    padding: 24px 0;
+  }
+  .value-num { font-size: 11px; }
+  .value-en em { font-size: 22px; }
+  .value-jp { font-size: 16px; }
+  .value-jp small { font-size: 12px; }
+  .value-body { font-size: 13px; padding-left: 0; line-height: 1.8; }
+
+  /* CTA */
+  .home-cta { padding: 80px 0; }
+  .cta-block { padding: 0 20px; }
+  .cta-primary, .cta-secondary {
+    width: 100%; justify-content: center;
+    padding: 16px 24px; font-size: 12px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .home-hero { padding: 90px 16px 48px; }
+  .home-manifesto, .home-services, .home-numbers, .home-values, .home-cta {
+    padding: 64px 0;
+  }
+  .numbers-grid { grid-template-columns: 1fr; gap: 14px; padding: 0 16px; }
+  .services-header, .numbers-header, .values-intro { padding-left: 16px; padding-right: 16px; }
+  .values-list { padding: 0 16px; }
+  .cta-block { padding: 0 16px; }
 }
