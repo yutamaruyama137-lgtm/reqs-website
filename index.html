@@ -381,6 +381,32 @@
       display: inline;
       letter-spacing: 0.06em;
     }
+    .concept-correction {
+      display: block;
+      line-height: 1.6;
+      margin-top: 0.1em;
+    }
+    .concept-correction-old {
+      display: block;
+      text-decoration: line-through;
+      text-decoration-color: var(--vermilion);
+      text-decoration-thickness: 2px;
+      opacity: 0.45;
+    }
+    .concept-correction-arrow {
+      display: block;
+      color: var(--vermilion);
+      font-family: system-ui, sans-serif;
+      font-style: normal;
+      font-size: 0.9em;
+      line-height: 1.2;
+      margin: 2px 0 2px 0.05em;
+      letter-spacing: 0;
+    }
+    .concept-correction-new {
+      display: block;
+      font-weight: 700;
+    }
     .concept-body {
       font-family: var(--font-jp);
       font-size: 18px; line-height: 2;
@@ -581,8 +607,8 @@
       margin-bottom: 28px;
     }
     .svc-card-title {
-      font-family: var(--font-jp); font-weight: 700;
-      font-size: 22px; line-height: 1.4;
+      font-family: var(--font-jp); font-weight: 800;
+      font-size: clamp(26px, 2.1vw, 32px); line-height: 1.35;
       letter-spacing: 0.02em;
       color: var(--paper);
       margin-bottom: 8px;
@@ -1341,7 +1367,7 @@
       .pillar-cards { grid-template-columns: 1fr; gap: 12px; }
       .svc-card { min-height: auto; padding: 24px 20px; }
       .svc-card-num { margin-bottom: 16px; }
-      .svc-card-title { font-size: 20px; }
+      .svc-card-title { font-size: 24px; font-weight: 800; }
       .pillar-cards.cols-1 .svc-card {
         grid-template-columns: 1fr; gap: 20px; padding: 24px 20px;
       }
@@ -1485,7 +1511,7 @@
     <div class="hero-bg-video"></div>
     <div class="hero-meta">
       <div>
-        <span class="brand-mark">REQS</span> / Tokyo<br/>
+        <span class="brand-mark">REQS</span> / TOKYO・SENDAI<br/>
         ESTD. 2026
       </div>
       <div class="hero-meta-right">
@@ -1497,10 +1523,10 @@
     <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="line"></span>
-        <span>AI Implementation × DX Consulting</span>
+        <span>3 Pillars × AI Implementation</span>
       </div>
       <h1 class="hero-title">
-        <span class="it">Translators</span><br/>
+        <span class="it">Interpreter</span><br/>
         <span class="stroke">of the</span><br/>
         AI <span class="it">era<span style="color:var(--vermilion);font-style:normal">.</span></span>
       </h1>
@@ -1509,8 +1535,9 @@
 
     <div class="hero-bottom">
       <div>
-        AX Diagnosis &nbsp;·&nbsp; In-house AI Install<br/>
-        Operational AX &nbsp;·&nbsp; AI Enablement
+        AX — AI Transformation<br/>
+        AIBPO — Business Process Outsourcing<br/>
+        Media — Content & Community
       </div>
       <div class="hero-scroll">
         <span>Scroll</span>
@@ -1545,9 +1572,13 @@
       </div>
       <div class="reveal">
         <p class="concept-jp-large">
-          <span class="brand-mark">REQS</span>は、常に最新AIを<br>
-          <span class="em">誰もが業務で使える形に翻訳して届ける</span>、<br>
-          AI導入・DXコンサルティング会社です。
+          <span class="brand-mark">REQS</span>は、<span class="em">常に最新・最高のAIを</span><br>
+          <span class="em">誰もが使いこなせる形に再解釈して届ける</span>、<br>
+          <span class="concept-correction">
+            <span class="concept-correction-old">AI導入・DXコンサルティング会社です。</span>
+            <span class="concept-correction-arrow">↓</span>
+            <span class="concept-correction-new">AIの体験をデザインする会社です。</span>
+          </span>
         </p>
         <p class="concept-body" style="margin-top: 40px;">
           技術と現場の間には、いつも「翻訳」が必要です。<br>
