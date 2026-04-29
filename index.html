@@ -103,8 +103,12 @@
       padding: 28px 48px;
       display: flex; justify-content: space-between; align-items: center;
       z-index: 100;
-      mix-blend-mode: difference;
+      mix-blend-mode: normal;
       color: var(--paper);
+      background: rgba(11, 20, 16, 0.52);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(245, 242, 234, 0.12);
     }
     .nav-logo {
       font-family: var(--font-sans);
@@ -1497,7 +1501,7 @@
 
   <!-- Navigation -->
   <nav class="nav" data-cursor="hover">
-    <div class="nav-logo"><img src="assets/reqs-logo-white.svg" alt="" class="brand-glyph" /><span class="brand-mark">REQS</span><span class="dot">.</span></div>
+    <a href="#" class="nav-logo" style="text-decoration:none;color:inherit;"><img src="assets/reqs-logo-white.svg" alt="" class="brand-glyph" /><span class="brand-mark">REQS</span><span class="dot">.</span></a>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#services">Services</a>
