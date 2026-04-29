@@ -25,7 +25,7 @@ window.AboutPage = function AboutPage({ onNav }) {
             <div className="page-hero-num">01 / 06</div>
           </div>
           <h1 className="page-hero-title">
-            <em style={{ fontFamily: 'var(--font-serif-en)' }}>Translators</em><br/>
+            <em style={{ fontFamily: 'var(--font-serif-en)' }}>Interpreter</em><br/>
             of <span style={{ color: 'var(--vermilion)' }}>the AI era.</span>
           </h1>
           <p className="page-hero-lede">

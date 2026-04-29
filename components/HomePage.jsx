@@ -58,7 +58,7 @@ window.HomePage = function HomePage({ onNav }) {
         <div className="hero-content">
           <h1 className="hero-title">
             We are<br/>
-            <em style={{ fontFamily: 'var(--font-serif-en)', fontStyle: 'italic', color: 'var(--vermilion)' }}>Translators</em><br/>
+            <em style={{ fontFamily: 'var(--font-serif-en)', fontStyle: 'italic', color: 'var(--vermilion)' }}>Interpreter</em><br/>
             of the AI era<span style={{ color: 'var(--vermilion)' }}>.</span>
           </h1>
           <div className="hero-en-sub">

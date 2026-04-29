@@ -203,10 +203,11 @@
 
     .hero-bottom {
       margin-top: 80px;
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: 1fr;
       gap: 32px;
       padding-top: 40px;
       border-top: 1px solid var(--rule);
+      max-width: 560px;
     }
     .hero-bit-label {
       font-family: var(--font-mono); font-size: 11px;
@@ -249,10 +250,10 @@
       content: '§'; font-family: var(--font-en); font-style: italic; font-size: 18px;
     }
     .section-title {
-      font-family: "Klee One", "游明朝", "Cormorant Garamond", serif;
+      font-family: "Klee One", "游明朝", serif;
       font-weight: 600;
       font-size: clamp(36px, 4.6vw, 68px);
-      line-height: 1.45; letter-spacing: 0.02em;
+      line-height: 1.35; letter-spacing: 0.015em;
       text-wrap: balance;
     }
     .section-title em {
@@ -435,6 +436,10 @@
       max-width: 1600px; margin: 0 auto;
     }
     .pricing-head { margin-bottom: 80px; }
+    .pricing-head .section-title {
+      font-size: clamp(40px, 5vw, 76px);
+      font-weight: 700;
+    }
 
     .pricing-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -471,8 +476,8 @@
       letter-spacing: 0.02em;
     }
     .plan-price {
-      font-family: var(--font-en); font-weight: 300;
-      font-size: clamp(56px, 5vw, 80px);
+      font-family: var(--font-sans); font-weight: 700;
+      font-size: clamp(60px, 5.4vw, 92px);
       line-height: 0.95; letter-spacing: -0.03em;
       color: var(--paper);
       margin-bottom: 4px;
@@ -876,9 +881,7 @@
           ITポートフォリオ・業務プロセス・組織構造を診断し、<span class="em">AI導入・DX戦略のロードマップを明確化</span>する。100以上のツールから最適なものを選定。
         </p>
         <div class="hero-bottom">
-          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">4 — 6週間</div></div>
-          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">診断書 + ロードマップ</div></div>
-          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">Lead × 1, Analyst × 2</div></div>
+          <div><div class="hero-bit-label">成果</div><div class="hero-bit-value">診断書 + ロードマップ</div></div>
         </div>
       </div>
     </section>
@@ -901,7 +904,7 @@
     <section class="problems">
       <div class="problems-head reveal">
         <div class="section-tag">Pain Points</div>
-        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+        <h2 class="section-title">こんな<em>悩み</em>を、<br/>抱えていませんか。</h2>
       </div>
       <div class="problems-grid">
         <div class="problem reveal">
@@ -992,9 +995,7 @@
           安全なAIを社内導入し、<span class="em">社員一人当たりの負担を削減</span>する。AI選定・ガイドライン策定・ローカルLLM構築までを一気通貫で支援。
         </p>
         <div class="hero-bottom">
-          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">2 — 4ヶ月</div></div>
-          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">社内AI基盤 + 運用ルール</div></div>
-          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Eng × 2</div></div>
+          <div><div class="hero-bit-label">成果</div><div class="hero-bit-value">社内AI基盤 + 運用ルール</div></div>
         </div>
       </div>
     </section>
@@ -1017,7 +1018,7 @@
     <section class="problems">
       <div class="problems-head reveal">
         <div class="section-tag">Pain Points</div>
-        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+        <h2 class="section-title">こんな<em>悩み</em>を、<br/>抱えていませんか。</h2>
       </div>
       <div class="problems-grid">
         <div class="problem reveal">
@@ -1102,9 +1103,7 @@
           実際のプロセスにAIを連携し、<span class="em">業務効率化を実現</span>する。Webアプリ開発・DB統合・自動化に加え、<span class="em">AIエージェント</span>という選択肢も。
         </p>
         <div class="hero-bottom">
-          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">2 — 6ヶ月</div></div>
-          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">稼働するAXシステム</div></div>
-          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Eng × 2-4</div></div>
+          <div><div class="hero-bit-label">成果</div><div class="hero-bit-value">稼働するAXシステム</div></div>
         </div>
       </div>
     </section>
@@ -1127,7 +1126,7 @@
     <section class="problems">
       <div class="problems-head reveal">
         <div class="section-tag">Pain Points</div>
-        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+        <h2 class="section-title">こんな<em>悩み</em>を、<br/>抱えていませんか。</h2>
       </div>
       <div class="problems-grid">
         <div class="problem reveal">
@@ -1224,9 +1223,7 @@
           持続可能なAI環境を<span class="em">社内から醸成</span>する。6ヶ月の伴走で、外注に依存しない自走チームを立ち上げる。
         </p>
         <div class="hero-bottom">
-          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">6ヶ月</div></div>
-          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">自走できる組織</div></div>
-          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">Lead × 1, Coach × 1-2</div></div>
+          <div><div class="hero-bit-label">成果</div><div class="hero-bit-value">自走できる組織</div></div>
         </div>
       </div>
     </section>
@@ -1249,7 +1246,7 @@
     <section class="problems">
       <div class="problems-head reveal">
         <div class="section-tag">Pain Points</div>
-        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+        <h2 class="section-title">こんな<em>悩み</em>を、<br/>抱えていませんか。</h2>
       </div>
       <div class="problems-grid">
         <div class="problem reveal">
@@ -1334,9 +1331,7 @@
           AIを活かした<span class="em">集客の仕組みを業務代行</span>で構築・運用する。SNS運用と広告運用を中核に、再現性のある成果を届ける。
         </p>
         <div class="hero-bottom">
-          <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">3ヶ月〜 / 月額制</div></div>
-          <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">運用代行 + 月次レポート</div></div>
-          <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Operator × 2</div></div>
+          <div><div class="hero-bit-label">成果</div><div class="hero-bit-value">運用代行 + 月次レポート</div></div>
         </div>
       </div>
     </section>
@@ -1359,7 +1354,7 @@
     <section class="problems">
       <div class="problems-head reveal">
         <div class="section-tag">Pain Points</div>
-        <h2 class="section-title">こんな<em>悩み</em>を、抱えていませんか。</h2>
+        <h2 class="section-title">こんな<em>悩み</em>を、<br/>抱えていませんか。</h2>
       </div>
       <div class="problems-grid">
         <div class="problem reveal">
