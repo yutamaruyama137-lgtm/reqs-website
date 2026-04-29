@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0B1410">
-  <title>REQS — IMA Style / AI時代の翻訳者だ。</title>
+  <title>REQS — AI時代の翻訳者だ。</title>
   <meta name="description" content="REQS — AI時代の翻訳者だ。AI導入・DXコンサルティングを通じて、最新AIを企業の業務に使える形に翻訳して届ける。">
 
   <!-- Favicon -->
@@ -15,12 +15,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     /* ===========================================
-       REQS × IMA Style
-       インスピレーション: ima-inc.world
+       REQS
        - フルブリードのシネマティックなHero
        - 巨大な英文タイポ（Display Serif Italic）
        - スクロール連動の垂直リール
@@ -42,10 +41,18 @@
       --rule: rgba(245,242,234,0.14);
       --rule-light: rgba(10,10,10,0.12);
 
-      --font-jp: "Shippori Mincho", "游明朝", "Yu Mincho", serif;
+      --font-jp: "Klee One", "游明朝", "Yu Mincho", serif;
       --font-en: "Cormorant Garamond", "Times New Roman", serif;
-      --font-sans: "Inter Tight", system-ui, sans-serif;
+      --font-sans: "Montserrat", system-ui, sans-serif;
       --font-mono: "JetBrains Mono", monospace;
+      --font-brand: "Figtree", "Montserrat", system-ui, sans-serif;
+    }
+    /* REQS brand mark — Figtree */
+    .brand-mark {
+      font-family: var(--font-brand);
+      font-weight: inherit;
+      letter-spacing: 0.04em;
+      font-feature-settings: "kern" 1, "ss01" 1;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -251,9 +258,10 @@
     }
     .hero-jp {
       font-family: var(--font-jp);
-      font-size: clamp(14px, 1.2vw, 18px);
+      font-size: clamp(16px, 1.6vw, 24px);
       letter-spacing: 0.3em;
-      color: var(--gray-600);
+      color: var(--gray-700);
+      font-weight: 500;
       margin-top: 40px;
       text-orientation: mixed;
     }
@@ -360,18 +368,25 @@
     }
     .concept-jp-large {
       font-family: var(--font-jp);
-      font-size: clamp(20px, 2vw, 32px);
-      line-height: 1.7;
+      font-size: clamp(26px, 3.2vw, 48px);
+      line-height: 1.85;
       letter-spacing: 0.04em;
       font-weight: 500;
       text-wrap: balance;
     }
-    .concept-jp-large .em { color: var(--vermilion); font-weight: 600; display: inline-block; }
+    .concept-jp-large .em {
+      color: var(--vermilion);
+      font-weight: 700;
+      font-size: 1.15em;
+      display: inline;
+      letter-spacing: 0.06em;
+    }
     .concept-body {
       font-family: var(--font-jp);
-      font-size: 16px; line-height: 2;
-      color: var(--gray-700);
-      max-width: 540px;
+      font-size: 18px; line-height: 2;
+      color: var(--paper-2);
+      max-width: 580px;
+      text-wrap: pretty;
     }
     .concept-list {
       list-style: none;
@@ -391,8 +406,9 @@
     }
     .concept-list .text {
       font-family: var(--font-jp);
-      font-size: 16px; line-height: 1.8;
+      font-size: 18px; line-height: 1.85;
       color: var(--paper);
+      font-weight: 500;
     }
 
     /* ============ KINETIC HEADLINE ============ */
@@ -421,10 +437,12 @@
     }
     .kinetic-jp {
       font-family: var(--font-jp);
-      font-size: clamp(16px, 1.5vw, 22px);
-      color: var(--gray-600);
+      font-size: clamp(20px, 2vw, 30px);
+      color: var(--paper-2);
       letter-spacing: 0.3em;
-      margin-top: 80px;
+      text-wrap: balance;
+      font-weight: 500;
+      margin-top: 140px;
       text-align: center;
     }
 
@@ -505,6 +523,7 @@
       max-width: 480px;
       justify-self: end;
       align-self: end;
+      text-wrap: balance;
     }
 
     .pillar-cards {
@@ -542,6 +561,17 @@
       background: var(--ink-2);
     }
     .svc-card:hover::before { opacity: 1; }
+    /* Disabled state — service detail pages WIP */
+    .svc-card.is-disabled { cursor: default; }
+    .svc-card.is-disabled:hover {
+      transform: none;
+      border-color: rgba(232,240,232,0.08);
+      background: var(--ink);
+    }
+    .svc-card.is-disabled:hover::before { opacity: 0; }
+    .svc-card.is-disabled .svc-card-cta { color: var(--gray-600); opacity: 0.6; }
+    .svc-card.is-disabled .svc-card-cta-arrow { color: var(--gray-600); }
+    .svc-card.is-disabled:hover .svc-card-cta-arrow { transform: none; }
     .svc-card > * { position: relative; z-index: 1; }
     .svc-card-main { display: contents; }
     .svc-card-num {
@@ -567,6 +597,7 @@
       font-size: 13px; line-height: 1.9;
       color: var(--gray-700);
       margin-bottom: 20px;
+      text-wrap: pretty;
     }
     .svc-card-subs {
       list-style: none;
@@ -833,6 +864,7 @@
       font-size: 14px;
       color: var(--gray-500);
       margin-top: 24px;
+      text-wrap: pretty;
       line-height: 1.7;
     }
 
@@ -899,6 +931,7 @@
       font-family: var(--font-jp);
       font-size: 14px; line-height: 1.85;
       color: var(--gray-600);
+      text-wrap: pretty;
     }
     .manifesto.story-mode .manifesto-bg { font-size: clamp(120px, 20vw, 360px); }
     .manifesto.story-mode .values-grid {
@@ -1090,14 +1123,14 @@
       border-top: 1px solid var(--rule);
     }
     .footer-massive {
-      font-family: var(--font-en); font-weight: 300;
+      font-family: var(--font-brand); font-weight: 800;
       font-size: clamp(80px, 16vw, 280px);
-      line-height: 0.85; letter-spacing: -0.05em;
+      line-height: 0.85; letter-spacing: -0.02em;
       margin-bottom: 100px;
       max-width: 1600px;
       margin-left: auto; margin-right: auto;
     }
-    .footer-massive em { font-style: italic; color: var(--vermilion); }
+    .footer-massive em { font-style: normal; color: var(--vermilion); }
     .footer-brand-mark {
       max-width: 1600px;
       margin: 0 auto 48px;
@@ -1154,10 +1187,10 @@
     }
     .loader.gone { opacity: 0; visibility: hidden; }
     .loader-text {
-      font-family: var(--font-en);
-      font-style: italic;
+      font-family: var(--font-brand);
+      font-style: normal;
       font-size: clamp(48px, 8vw, 120px);
-      font-weight: 300;
+      font-weight: 700;
       color: var(--vermilion);
     }
     .loader-pct {
@@ -1273,7 +1306,7 @@
       /* Hero */
       .hero { padding: 110px 20px 60px; min-height: auto; }
       .hero-title { font-size: clamp(54px, 16vw, 96px) !important; line-height: 0.95 !important; }
-      .hero-jp { font-size: 14px !important; letter-spacing: 0.04em !important; }
+      .hero-jp { font-size: 16px !important; letter-spacing: 0.04em !important; font-weight: 500 !important; }
       .hero-meta { font-size: 10px; flex-direction: column; gap: 8px; }
       .hero-meta-right { text-align: left; }
       .hero-bottom, .hero-scroll { display: none; }
@@ -1288,8 +1321,13 @@
       /* Common section spacing */
       .concept { padding: 80px 20px; }
       .concept-grid { grid-template-columns: 1fr; gap: 40px; }
+      .concept-jp-large { font-size: clamp(22px, 6vw, 32px) !important; line-height: 1.8 !important; }
+      .concept-jp-large .em { font-size: 1.1em !important; }
+      .concept-body { font-size: 16px !important; }
+      .concept-list .text { font-size: 16px !important; }
       .kinetic { padding: 80px 20px; }
       .kinetic-line { font-size: clamp(36px, 11vw, 64px); line-height: 1.1; }
+      .kinetic-jp { font-size: clamp(15px, 4vw, 20px) !important; letter-spacing: 0.18em !important; }
 
       /* Services & Pillars */
       .services { padding: 100px 0 0; }
@@ -1397,7 +1435,7 @@
 
   <!-- Loader -->
   <div class="loader" id="loader">
-    <div class="loader-text">REQS<sup style="font-family: var(--font-mono); font-size: 14px; vertical-align: super; margin-left: 12px; color: var(--gray-500);">2026</sup></div>
+    <div class="loader-text"><span class="brand-mark">REQS</span><sup style="font-family: var(--font-mono); font-size: 14px; vertical-align: super; margin-left: 12px; color: var(--gray-500);">2026</sup></div>
     <div class="loader-pct" id="loaderPct">000 / 100</div>
   </div>
 
@@ -1421,7 +1459,7 @@
 
   <!-- Navigation -->
   <nav class="nav" data-cursor="hover">
-    <div class="nav-logo"><img src="assets/reqs-logo-white.svg" alt="" class="brand-glyph" />REQS<span class="dot">.</span></div>
+    <div class="nav-logo"><img src="assets/reqs-logo-white.svg" alt="" class="brand-glyph" /><span class="brand-mark">REQS</span><span class="dot">.</span></div>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -1447,12 +1485,12 @@
     <div class="hero-bg-video"></div>
     <div class="hero-meta">
       <div>
-        REQS / Tokyo<br/>
+        <span class="brand-mark">REQS</span> / Tokyo<br/>
         ESTD. 2026
       </div>
       <div class="hero-meta-right">
-        N° 001 — Editorial<br/>
-        2026.04.26
+        AI Implementation<br/>
+        Est. 2026
       </div>
     </div>
 
@@ -1488,8 +1526,8 @@
   <!-- Marquee Band -->
   <section class="marquee">
     <div class="marquee-track">
-      <span class="marquee-item"><em>Translate</em><span class="star">✦</span>Every<em>AI</em><span class="star">✧</span>Into<em>Reality</em><span class="star">✦</span></span>
-      <span class="marquee-item"><em>Translate</em><span class="star">✦</span>Every<em>AI</em><span class="star">✧</span>Into<em>Reality</em><span class="star">✦</span></span>
+      <span class="marquee-item"><em>Translate</em><span class="star">✦</span>Every <em>AI</em><span class="star">✧</span>Into <em>Reality</em><span class="star">✦</span></span>
+      <span class="marquee-item"><em>Translate</em><span class="star">✦</span>Every <em>AI</em><span class="star">✧</span>Into <em>Reality</em><span class="star">✦</span></span>
     </div>
   </section>
 
@@ -1498,7 +1536,7 @@
     <div class="section-num">§ 01 / Concept</div>
     <div class="concept-grid">
       <div class="reveal">
-        <div class="concept-eyebrow">About REQS</div>
+        <div class="concept-eyebrow">About <span class="brand-mark">REQS</span></div>
         <h2 class="concept-title">
           We bridge<br/>
           the gap between<br/>
@@ -1507,10 +1545,14 @@
       </div>
       <div class="reveal">
         <p class="concept-jp-large">
-          私たちREQSは、最新AIを<span class="em">企業の業務に使える形に翻訳して届ける</span>、AI導入・DXコンサルティング会社です。
+          <span class="brand-mark">REQS</span>は、常に最新AIを<br>
+          <span class="em">誰もが業務で使える形に翻訳して届ける</span>、<br>
+          AI導入・DXコンサルティング会社です。
         </p>
         <p class="concept-body" style="margin-top: 40px;">
-          技術と現場のあいだには、いつも「翻訳」が必要です。性能・プロンプト・ドメイン知見。それらすべてを束ね、組織が"使いこなせる"形に整えるのが、私たちの仕事です。
+          技術と現場の間には、いつも「翻訳」が必要です。<br>
+          性能・プロンプト・API・データベース。<br>
+          それらをすべて束ね、組織が"使いこなせる"形に整えるのが、私たちの仕事です。
         </p>
         <ul class="concept-list">
           <li>
@@ -1519,7 +1561,11 @@
           </li>
           <li>
             <span class="num">02</span>
-            <span class="text">AIを使いこなすには、専門技術が必要だ。</span>
+            <span class="text">APIやプロンプトを使いこなす専門技術が必要だ。</span>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <span class="text">AI導入で結局、業務・管理コストが増えてしまう。</span>
           </li>
         </ul>
       </div>
@@ -1545,8 +1591,9 @@
         </h2>
       </div>
       <div class="reveal" style="padding-top: 20px;">
-        <p style="font-family: var(--font-jp); font-size: 16px; line-height: 1.9; color: var(--gray-500);">
-          REQSは「内製化を支援するAX」と「業務代行で外部化するAIBPO」の2軸で、企業のAI Transformationを設計・実装・運用まで一気通貫で伴走します。
+        <p style="font-family: var(--font-jp); font-size: 16px; line-height: 1.9; color: var(--gray-500); text-wrap: pretty;">
+          <span class="brand-mark">REQS</span>は「内製化を支援するAX」と「業務代行で外部化するAIBPO」の2軸で、<br>
+          企業のAI Transformationを設計・実装・運用まで一気通貫で伴走します。
         </p>
       </div>
     </div>
@@ -1563,61 +1610,47 @@
             <h3 class="pillar-title"><em>AX</em> — AI Transformation</h3>
           </div>
           <p class="pillar-jp">
-            診断 → 導入 → 自動化 → 定着の4ステップで、自社の中にAIを根付かせる。社員一人ひとりがAIを使いこなす組織へ。
+            診断 → 導入 → 自動化 → 定着の4ステップで、<br>
+            自社の中にAIを根付かせる。<br>
+            社員一人ひとりがAIを使いこなす組織へ。
           </p>
         </div>
         <div class="pillar-cards">
-          <a class="svc-card" href="service-detail.html#service-1" data-preview-title="AX診断" data-preview-copy="課題の可視化からロードマップ設計まで。最初に何をやるべきかが分かる診断ページです。">
+          <div class="svc-card" data-preview-title="AX診断" data-preview-copy="課題の可視化からロードマップ設計まで。">
             <div class="svc-card-num">A.01</div>
             <h4 class="svc-card-title">AX診断</h4>
             <div class="svc-card-en">Consulting & Roadmap</div>
             <p class="svc-card-desc">
               ITポートフォリオ・業務プロセス・組織構造を診断し、AI活用ロードマップを提示。100以上のツールから最適選定。
             </p>
-            <div class="svc-card-cta">
-              <span>View Detail</span>
-              <span class="svc-card-cta-arrow">→</span>
-            </div>
-          </a>
+          </div>
 
-          <a class="svc-card" href="service-detail.html#service-2" data-preview-title="社内AI導入" data-preview-copy="安全な社内利用ルール、導入設計、定着までをまとめた導入ガイドを確認できます。">
+          <div class="svc-card" data-preview-title="社内AI導入" data-preview-copy="安全な社内利用ルール、導入設計、定着まで。">
             <div class="svc-card-num">A.02</div>
             <h4 class="svc-card-title">社内AI導入</h4>
             <div class="svc-card-en">In-house AI Install</div>
             <p class="svc-card-desc">
               安全なAIを社内導入し、社員一人当たりの負担を削減。AI選定・ガイドライン策定・ローカルLLM構築を一気通貫で。
             </p>
-            <div class="svc-card-cta">
-              <span>View Detail</span>
-              <span class="svc-card-cta-arrow">→</span>
-            </div>
-          </a>
+          </div>
 
-          <a class="svc-card" href="service-detail.html#service-3" data-preview-title="業務自動化" data-preview-copy="実運用にどう組み込むかを業務フロー別に紹介。自動化の具体像をイメージできます。">
+          <div class="svc-card" data-preview-title="業務自動化" data-preview-copy="実運用にどう組み込むかを業務フロー別に紹介。">
             <div class="svc-card-num">A.03</div>
             <h4 class="svc-card-title">業務自動化</h4>
             <div class="svc-card-en">Operational Automation</div>
             <p class="svc-card-desc">
               既存業務にAIを組み込み、繰り返し作業をゼロに。Webアプリ・DB統合・ワークフロー自動化を実装。
             </p>
-            <div class="svc-card-cta">
-              <span>View Detail</span>
-              <span class="svc-card-cta-arrow">→</span>
-            </div>
-          </a>
+          </div>
 
-          <a class="svc-card" href="service-detail.html#service-4" data-preview-title="定着支援" data-preview-copy="研修・運用・評価設計まで、導入後に成果を継続させる支援内容を確認できます。">
+          <div class="svc-card" data-preview-title="定着支援" data-preview-copy="研修・運用・評価設計まで、導入後の成果継続支援。">
             <div class="svc-card-num">A.04</div>
             <h4 class="svc-card-title">定着支援</h4>
             <div class="svc-card-en">AI Enablement</div>
             <p class="svc-card-desc">
               持続可能なAI環境を社内から醸成。研修・伴走・内製化を組み合わせ、外注に依存しない自走チームを立ち上げる。
             </p>
-            <div class="svc-card-cta">
-              <span>View Detail</span>
-              <span class="svc-card-cta-arrow">→</span>
-            </div>
-          </a>
+          </div>
         </div>
       </div>
 
@@ -1632,11 +1665,13 @@
             <h3 class="pillar-title"><em>AIBPO</em> — Business Process Outsourcing</h3>
           </div>
           <p class="pillar-jp">
-            自社で抱えにくい業務はREQSへ。AIを活かした業務代行で、企業のリソースをコアバリュー創出に集中させる。
+            自社で抱えにくい業務は<span class="brand-mark">REQS</span>へ。<br>
+            AIを活かした業務代行で、企業のリソースを<br>
+            コアバリュー創出に集中させる。
           </p>
         </div>
         <div class="pillar-cards cols-1">
-          <a class="svc-card" href="service-detail.html#service-5" data-preview-title="WEBマーケティング" data-preview-copy="SNS運用と広告運用を、AI活用で再現性高く実行する業務代行サービス。">
+          <div class="svc-card" data-preview-title="WEBマーケティング" data-preview-copy="SNS運用と広告運用をAI活用で再現性高く実行。">
             <div class="svc-card-main">
               <div class="svc-card-num">B.01</div>
               <h4 class="svc-card-title">WEBマーケティング</h4>
@@ -1644,131 +1679,76 @@
               <p class="svc-card-desc">
                 認知獲得からリード化、商談化まで。AIを駆使したマーケティングオートメーションで、再現性のある集客の仕組みを構築・運用代行します。
               </p>
-              <div class="svc-card-cta">
-                <span>View Detail</span>
-                <span class="svc-card-cta-arrow">→</span>
-              </div>
             </div>
             <ul class="svc-card-subs">
               <li>SNS運用</li>
               <li>広告運用</li>
+              <li>採用支援</li>
+              <li>AIベンダーマーケティング</li>
+              <li>AIベンダー営業代行</li>
             </ul>
-          </a>
+          </div>
+        </div>
+        <!-- B.02 国内・海外営業支援 -->
+        <div class="pillar-cards cols-1" style="margin-top: 16px;">
+          <div class="svc-card" data-preview-title="国内・海外営業支援" data-preview-copy="AI・ロボットベンダー企業の営業活動を国内外で代行します。">
+            <div class="svc-card-main">
+              <div class="svc-card-num">B.02</div>
+              <h4 class="svc-card-title">国内・海外営業支援</h4>
+              <div class="svc-card-en">Domestic &amp; Global Sales Support</div>
+              <p class="svc-card-desc">
+                AI・ロボットベンダー企業の営業・マーケティング活動を代行。貴社のテクノロジーを必要としている企業へ、国内外問わず最短距離で届けます。
+              </p>
+            </div>
+            <ul class="svc-card-subs">
+              <li>製品紹介・販路開拓</li>
+              <li>国内営業代行</li>
+              <li>海外営業支援</li>
+              <li>マーケティング代行</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PILLAR C — MEDIA ============ -->
+      <div class="pillar reveal">
+        <div class="pillar-header">
+          <div>
+            <div class="pillar-tag">
+              <span>Pillar C</span>
+              <span class="pillar-axis">/ axis 03</span>
+            </div>
+            <h3 class="pillar-title"><em>Media</em> — Content &amp; Community</h3>
+          </div>
+          <p class="pillar-jp">
+            AIをテーマに、発信・討論・対談を通じてコミュニティと知識の循環を生み出す。
+          </p>
+        </div>
+        <div class="pillar-cards cols-1">
+          <div class="svc-card is-disabled" data-preview-title="メディア事業" data-preview-copy="AI技術発信・討論・ポッドキャスト。準備中です。">
+            <div class="svc-card-main">
+              <div class="svc-card-num">C.01</div>
+              <h4 class="svc-card-title">メディア事業</h4>
+              <div class="svc-card-en">Media Business</div>
+              <p class="svc-card-desc">
+                AIをテーマに、発信・討論・対談を通じてコミュニティと知識の循環を生み出すメディアブランドを展開します。
+              </p>
+              <div class="svc-card-cta">
+                <span>Coming Soon...</span>
+                <span class="svc-card-cta-arrow">·</span>
+              </div>
+            </div>
+            <ul class="svc-card-subs">
+              <li>パーソナルAI討論メディア</li>
+              <li>IPを活用したAI技術発信</li>
+              <li>対談ポッドキャスト</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Works -->
-  <section class="works is-hidden" id="works" data-screen-label="Works">
-    <div class="section-num">§ 03 / Selected Works</div>
-    <div class="works-header">
-      <div class="reveal">
-        <h2 class="works-title">
-          Selected<br/>
-          <em>case studies.</em>
-        </h2>
-      </div>
-      <div class="works-meta reveal">
-        2024 — 2026<br/>
-        24 projects shipped
-      </div>
-    </div>
-
-    <div class="works-grid">
-      <article class="work reveal">
-        <div class="work-img">
-          <span class="work-cat">CASE 01</span>
-          <span class="work-num">N°01</span>
-          <div class="work-img-inner">
-            <span class="work-placeholder">image / 1600 × 2000</span>
-          </div>
-        </div>
-        <div class="work-meta">
-          <span>Manufacturing / 製造業</span>
-          <span>2025</span>
-        </div>
-        <h3 class="work-title">
-          経理業務の8割を自動化、月次決算を3日に短縮。
-          <span class="work-title-en">Operational AX × Manufacturing.</span>
-        </h3>
-        <div class="work-tags">
-          <span class="work-tag">業務AX</span>
-          <span class="work-tag">RPA連携</span>
-          <span class="work-tag">DB統合</span>
-        </div>
-      </article>
-
-      <article class="work reveal">
-        <div class="work-img">
-          <span class="work-cat">CASE 02</span>
-          <span class="work-num">N°02</span>
-          <div class="work-img-inner">
-            <span class="work-placeholder">image / 1600 × 2000</span>
-          </div>
-        </div>
-        <div class="work-meta">
-          <span>Retail / 小売・EC</span>
-          <span>2025</span>
-        </div>
-        <h3 class="work-title">
-          カスタマーサポートをAIエージェント化、CSAT＋32%。
-          <span class="work-title-en">AI Enablement × E-Commerce.</span>
-        </h3>
-        <div class="work-tags">
-          <span class="work-tag">定着支援</span>
-          <span class="work-tag">CS自動化</span>
-          <span class="work-tag">プロンプト</span>
-        </div>
-      </article>
-
-      <article class="work reveal">
-        <div class="work-img">
-          <span class="work-cat">CASE 03</span>
-          <span class="work-num">N°03</span>
-          <div class="work-img-inner">
-            <span class="work-placeholder">image / 1600 × 2000</span>
-          </div>
-        </div>
-        <div class="work-meta">
-          <span>SaaS / Startup</span>
-          <span>2026</span>
-        </div>
-        <h3 class="work-title">
-          採用面接の事前評価をAIで標準化。
-          <span class="work-title-en">Enablement × HR Tech.</span>
-        </h3>
-        <div class="work-tags">
-          <span class="work-tag">定着支援</span>
-          <span class="work-tag">採用AI</span>
-          <span class="work-tag">評価設計</span>
-        </div>
-      </article>
-
-      <article class="work reveal">
-        <div class="work-img">
-          <span class="work-cat">CASE 04</span>
-          <span class="work-num">N°04</span>
-          <div class="work-img-inner">
-            <span class="work-placeholder">image / 1600 × 2000</span>
-          </div>
-        </div>
-        <div class="work-meta">
-          <span>Finance / 金融</span>
-          <span>2026</span>
-        </div>
-        <h3 class="work-title">
-          稟議フローをAI要約で90%スピードアップ。
-          <span class="work-title-en">AX Diagnosis × Finance.</span>
-        </h3>
-        <div class="work-tags">
-          <span class="work-tag">AX診断</span>
-          <span class="work-tag">業務AX</span>
-          <span class="work-tag">稟議AI</span>
-        </div>
-      </article>
-    </div>
-  </section>
 
   <!-- Numbers -->
   <section class="numbers is-hidden">
@@ -1810,17 +1790,17 @@
         <div class="value reveal">
           <div class="value-num"><span>Chapter 01</span></div>
           <h4 class="value-title">AIの情報は増えたのに、現場の変化は進まない。</h4>
-          <p class="value-body">私たちは、企業がAIを「知っている」状態で止まってしまう現実を何度も見てきました。ツールは増え続ける一方で、何を選び、どう業務に組み込み、どう定着させるかが難しい。そのギャップこそが、挑戦する理由です。</p>
+          <p class="value-body">私たちは、企業がAIを「知っている」状態で止まってしまう現実を何度も見てきました。<br>ツールは増え続ける一方で、何を選び、どう業務に組み込み、どう定着させるかが難しい。<br>そのギャップこそが、挑戦する理由です。</p>
         </div>
         <div class="value reveal">
           <div class="value-num"><span>Chapter 02</span></div>
           <h4 class="value-title">翻訳者として、技術と業務のあいだに立つ。</h4>
-          <p class="value-body">REQSは、最新のAI技術をそのまま渡す会社ではありません。業務・組織・運用の文脈に合わせて、実際に使える形へ翻訳する会社です。診断、導入、業務実装、定着までを一つの流れで支援し、現場に残る変化を作ります。</p>
+          <p class="value-body"><span class="brand-mark">REQS</span>は、最新のAI技術をそのまま渡す会社ではありません。<br>業務・組織・運用の文脈に合わせて、実際に使える形へ翻訳する会社です。<br>診断、導入、業務実装、定着までを一つの流れで支援し、現場に残る変化を作ります。</p>
         </div>
         <div class="value reveal">
           <div class="value-num"><span>Chapter 03</span></div>
           <h4 class="value-title">目指すのは、誰かの業務が確かに前へ進むこと。</h4>
-          <p class="value-body">私たちのミッションは、AIを導入すること自体ではなく、企業が自走できる状態をつくることです。人の不安を減らし、挑戦できる時間を増やす。その積み重ねが、組織の未来を強くすると信じています。</p>
+          <p class="value-body">私たちのミッションは、AIを導入すること自体ではなく、<br>企業が自走できる状態をつくることです。<br>人の不安を減らし、挑戦できる時間を増やす。<br>その積み重ねが、組織の未来を強くすると信じています。</p>
         </div>
       </div>
     </div>
@@ -1880,12 +1860,12 @@
       <img src="assets/reqs-logo-white.svg" alt="REQS" />
     </div>
     <div class="footer-massive">
-      <em>REQS.</em>
+      <em><span class="brand-mark">REQS</span>.</em>
     </div>
     <div class="footer-meta">
       <div class="footer-col">
         <h5>Studio</h5>
-        <p>REQS</p>
+        <p><span class="brand-mark">REQS</span></p>
         <p>Tokyo, Japan</p>
       </div>
       <div class="footer-col">
@@ -1902,16 +1882,9 @@
         <a href="#">Career</a>
         <a href="#">Privacy</a>
       </div>
-      <div class="footer-col">
-        <h5>Connect</h5>
-        <a href="#">X / Twitter</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Note</a>
-        <a href="spa.html">Editorial Site →</a>
-      </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 REQS. All rights reserved.</span>
+      <span>© 2026 <span class="brand-mark">REQS</span>. All rights reserved.</span>
       <span>Translate AI into Reality.</span>
     </div>
   </footer>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0B1410">
-  <title>Service Detail — REQS / IMA Style</title>
+  <title>Service Detail — REQS</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/reqs-logo-white.svg">
@@ -13,7 +13,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -32,10 +32,18 @@
       --rule: rgba(232,240,232,0.14);
       --rule-light: rgba(11,20,16,0.12);
 
-      --font-jp: "Shippori Mincho", "游明朝", serif;
+      --font-jp: "Klee One", "游明朝", serif;
       --font-en: "Cormorant Garamond", "Times New Roman", serif;
-      --font-sans: "Inter Tight", system-ui, sans-serif;
+      --font-sans: "Montserrat", system-ui, sans-serif;
       --font-mono: "JetBrains Mono", monospace;
+      --font-brand: "Figtree", "Montserrat", system-ui, sans-serif;
+    }
+    /* REQS brand mark — Figtree */
+    .brand-mark {
+      font-family: var(--font-brand);
+      font-weight: inherit;
+      letter-spacing: 0.02em;
+      font-feature-settings: "kern" 1, "ss01" 1;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -195,22 +203,23 @@
 
     .hero-bottom {
       margin-top: 80px;
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 32px;
       padding-top: 40px;
       border-top: 1px solid var(--rule);
     }
     .hero-bit-label {
-      font-family: var(--font-mono); font-size: 10px;
+      font-family: var(--font-mono); font-size: 11px;
       letter-spacing: 0.2em; color: var(--green);
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .hero-bit-value {
       font-family: var(--font-jp);
-      font-size: 16px;
+      font-size: 18px;
       color: var(--paper);
       line-height: 1.6;
+      font-weight: 500;
     }
 
     section { position: relative; }
@@ -240,12 +249,17 @@
       content: '§'; font-family: var(--font-en); font-style: italic; font-size: 18px;
     }
     .section-title {
-      font-family: var(--font-en); font-weight: 300;
-      font-size: clamp(48px, 6vw, 96px);
-      line-height: 0.95; letter-spacing: -0.03em;
+      font-family: "Klee One", "游明朝", "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: clamp(36px, 4.6vw, 68px);
+      line-height: 1.45; letter-spacing: 0.02em;
       text-wrap: balance;
     }
-    .section-title em { font-style: italic; color: var(--green); }
+    .section-title em {
+      font-style: normal;
+      color: var(--green);
+      font-weight: 700;
+    }
 
     .overview-body {
       font-family: var(--font-jp);
@@ -477,6 +491,19 @@
       letter-spacing: 0.16em; color: var(--gray-600);
       text-transform: uppercase;
       margin-bottom: 36px;
+      margin-top: 12px;
+    }
+    .pricing-note {
+      max-width: 720px;
+      margin: 80px auto 0;
+      padding: 28px 32px;
+      border: 1px dashed var(--rule);
+      border-radius: 4px;
+      font-family: var(--font-jp);
+      font-size: 15px;
+      line-height: 2;
+      color: var(--gray-700);
+      text-align: center;
     }
     .plan-features {
       list-style: none;
@@ -698,8 +725,8 @@
       .hero-title { font-size: clamp(48px, 14vw, 88px) !important; line-height: 0.9 !important; }
       .hero-jp { font-size: 14px !important; line-height: 1.7 !important; margin-top: 32px !important; max-width: 100% !important; }
       .hero-bottom { grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 28px; margin-top: 56px; }
-      .hero-bit-label { font-size: 9px; }
-      .hero-bit-value { font-size: 13px; }
+      .hero-bit-label { font-size: 10px; }
+      .hero-bit-value { font-size: 14px; }
 
       /* Section spacing */
       .section-num { display: none; }
@@ -748,16 +775,16 @@
       .deliverable-title { font-size: 17px; }
       .deliverable-body { font-size: 13px; }
 
-      /* Pricing */
+      /* Plans */
       .pricing { padding: 80px 20px; }
       .pricing-head { margin-bottom: 48px; }
       .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
       .plan { padding: 32px 24px; }
-      .plan-jp { font-size: 20px; margin-bottom: 24px; }
-      .plan-price { font-size: clamp(48px, 12vw, 64px) !important; }
-      .plan-period { margin-bottom: 24px; }
+      .plan-jp { font-size: 20px; margin-bottom: 16px; }
+      .plan-period { margin-bottom: 24px; margin-top: 8px; }
       .plan-features li { font-size: 13px; padding: 8px 0; }
       .pricing-bg { font-size: clamp(120px, 32vw, 200px) !important; }
+      .pricing-note { margin-top: 48px; padding: 20px; font-size: 13px; }
 
       /* FAQ */
       .faq { padding: 80px 20px; }
@@ -815,7 +842,7 @@
 </head>
 <body>
   <nav class="nav">
-    <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit"><img src="assets/reqs-logo.png" alt="" class="brand-glyph" />REQS<span class="dot">.</span></a>
+    <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit"><img src="assets/reqs-logo.png" alt="" class="brand-glyph" /><span class="brand-mark">REQS</span><span class="dot">.</span></a>
     <a href="index.html#services" class="nav-back">
       <span>←</span><span>Back to Services</span>
     </a>
@@ -852,7 +879,6 @@
           <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">4 — 6週間</div></div>
           <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">診断書 + ロードマップ</div></div>
           <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">Lead × 1, Analyst × 2</div></div>
-          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥1,800,000</div></div>
         </div>
       </div>
     </section>
@@ -866,7 +892,7 @@
         </div>
         <div class="overview-body reveal">
           <p class="pull">AI導入で最も多い失敗は、<span class="em">「自社の現在地を知らないまま、流行のツールを入れること」</span>です。</p>
-          <p>REQSのAX診断は、ITポートフォリオ・業務プロセス・組織構造・データ基盤の4軸でクライアントの現在地を解像度高く把握し、AI活用の「効く順番」を提示します。</p>
+          <p><span class="brand-mark">REQS</span>のAX診断は、ITポートフォリオ・業務プロセス・組織構造・データ基盤の4軸でクライアントの現在地を解像度高く把握し、AI活用の「効く順番」を提示します。</p>
           <p>診断書は単なるレポートではなく、「成果診断・ギャップ分析・テクノロジーロードマップ・コスト予測」の4要素から構成され、6/12/24ヶ月後の未来像と、そこに至る道筋を明確化します。</p>
         </div>
       </div>
@@ -969,7 +995,6 @@
           <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">2 — 4ヶ月</div></div>
           <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">社内AI基盤 + 運用ルール</div></div>
           <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Eng × 2</div></div>
-          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥3,000,000</div></div>
         </div>
       </div>
     </section>
@@ -983,8 +1008,8 @@
         </div>
         <div class="overview-body reveal">
           <p class="pull">「とりあえずChatGPTを使ってみた」では、<span class="em">セキュリティ・コスト・定着のすべてが中途半端</span>になります。</p>
-          <p>REQSの社内AI導入は、貴社の業務要件に最適なAIモデルを比較・検討し、ガイドラインの策定と効果計測の仕組みづくり、必要に応じてローカルLLMの構築までを一貫して支援します。</p>
-          <p>クラウドAIだけでなく、機密情報を扱う業務にはローカルLLM(REQS LLM)を併用するハイブリッド構成も選択可能。社員の負担を削減しながら、情報漏洩リスクを最小化します。</p>
+          <p><span class="brand-mark">REQS</span>の社内AI導入は、貴社の業務要件に最適なAIモデルを比較・検討し、ガイドラインの策定と効果計測の仕組みづくり、必要に応じてローカルLLMの構築までを一貫して支援します。</p>
+          <p>クラウドAIだけでなく、機密情報を扱う業務にはローカルLLM(<span class="brand-mark">REQS</span> LLM)を併用するハイブリッド構成も選択可能。社員の負担を削減しながら、情報漏洩リスクを最小化します。</p>
         </div>
       </div>
     </section>
@@ -1036,7 +1061,7 @@
           <div class="step reveal">
             <div class="step-num">03</div>
             <div class="step-name">ローカルLLM構築<span class="en">— Local LLM (Optional)</span></div>
-            <div class="step-body">機密情報を扱う業務向けに、社内ネットワーク内で完結するREQS LLMを構築。クラウドと併用するハイブリッド運用も可。</div>
+            <div class="step-body">機密情報を扱う業務向けに、社内ネットワーク内で完結する<span class="brand-mark">REQS</span> LLMを構築。クラウドと併用するハイブリッド運用も可。</div>
             <div class="step-meta"><strong>Phase 3</strong>4 — 8週間</div>
           </div>
         </div>
@@ -1052,7 +1077,7 @@
         <div class="deliverable reveal"><div class="deliverable-num">01</div><div><h4 class="deliverable-title">AI選定レポート</h4><p class="deliverable-body">クラウド/ローカルAIの比較表、評価軸別のスコアリング、推奨構成と導入手順。</p></div></div>
         <div class="deliverable reveal"><div class="deliverable-num">02</div><div><h4 class="deliverable-title">利用ガイドライン</h4><p class="deliverable-body">情報の取扱い・禁止事項・著作権・社内承認フローをまとめた運用ルール集。</p></div></div>
         <div class="deliverable reveal"><div class="deliverable-num">03</div><div><h4 class="deliverable-title">効果計測ダッシュボード</h4><p class="deliverable-body">利用状況・成果・コストを可視化するKPIダッシュボードと月次レポート設計。</p></div></div>
-        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">ローカルLLM環境 (任意)</h4><p class="deliverable-body">GPUサーバー設計・REQS LLMセットアップ・社内ネットワーク連携・運用マニュアル。</p></div></div>
+        <div class="deliverable reveal"><div class="deliverable-num">04</div><div><h4 class="deliverable-title">ローカルLLM環境 (任意)</h4><p class="deliverable-body">GPUサーバー設計・<span class="brand-mark">REQS</span> LLMセットアップ・社内ネットワーク連携・運用マニュアル。</p></div></div>
       </div>
     </section>
   </div>
@@ -1080,7 +1105,6 @@
           <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">2 — 6ヶ月</div></div>
           <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">稼働するAXシステム</div></div>
           <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Eng × 2-4</div></div>
-          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥4,500,000</div></div>
         </div>
       </div>
     </section>
@@ -1094,7 +1118,7 @@
         </div>
         <div class="overview-body reveal">
           <p class="pull">AIを<span class="em">「ツールではなく業務の一部」</span>にする。それが業務AXの目的です。</p>
-          <p>既存業務にAIを組み込むには、業務理解・ツール選定・統合設計・運用設計の4つを同時に解く必要があります。REQSは内製エンジニアと一緒に、これらを一気通貫で実装します。</p>
+          <p>既存業務にAIを組み込むには、業務理解・ツール選定・統合設計・運用設計の4つを同時に解く必要があります。<span class="brand-mark">REQS</span>は内製エンジニアと一緒に、これらを一気通貫で実装します。</p>
           <p>既存のSaaS、社内DB、コミュニケーションツール、AIモデル — それらを"配管"でつなぎ、現場が違和感なく使えるフローを構築します。</p>
         </div>
       </div>
@@ -1203,7 +1227,6 @@
           <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">6ヶ月</div></div>
           <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">自走できる組織</div></div>
           <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">Lead × 1, Coach × 1-2</div></div>
-          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥3,200,000</div></div>
         </div>
       </div>
     </section>
@@ -1217,7 +1240,7 @@
         </div>
         <div class="overview-body reveal">
           <p class="pull">AIを使うには、技術ではなく<span class="em">「使いこなせる人材と文化」</span>が要ります。</p>
-          <p>REQSのAI定着支援は、6ヶ月でクライアント社内に「AIを自走できるチーム」を立ち上げるプログラムです。研修・伴走・内製化を組み合わせ、外注依存しない組織をつくります。</p>
+          <p><span class="brand-mark">REQS</span>のAI定着支援は、6ヶ月でクライアント社内に「AIを自走できるチーム」を立ち上げるプログラムです。研修・伴走・内製化を組み合わせ、外注依存しない組織をつくります。</p>
           <p>技術的な研修だけでなく、社内のキーパーソン発掘、評価制度の改訂、社内コミュニティ運営まで踏み込みます。</p>
         </div>
       </div>
@@ -1314,7 +1337,6 @@
           <div><div class="hero-bit-label">Duration</div><div class="hero-bit-value">3ヶ月〜 / 月額制</div></div>
           <div><div class="hero-bit-label">Output</div><div class="hero-bit-value">運用代行 + 月次レポート</div></div>
           <div><div class="hero-bit-label">Team</div><div class="hero-bit-value">PM × 1, Operator × 2</div></div>
-          <div><div class="hero-bit-label">Starts From</div><div class="hero-bit-value">¥600,000 / 月</div></div>
         </div>
       </div>
     </section>
@@ -1329,7 +1351,7 @@
         <div class="overview-body reveal">
           <p class="pull">マーケティングの実行リソースを<span class="em">「自社で抱えない」</span>選択肢を、AIで現実的にする。</p>
           <p>SNSの企画・制作・運用、広告のクリエイティブ・配信・改善まで。AI＋人のハイブリッドオペレーションで、社内に専門人材がいなくても継続的に成果を出します。</p>
-          <p>毎月のKPIレビューと打ち手提案をセットでお届け。広告費の最適配分、コンテンツテーマの戦略立案までREQS側でリードします。</p>
+          <p>毎月のKPIレビューと打ち手提案をセットでお届け。広告費の最適配分、コンテンツテーマの戦略立案まで<span class="brand-mark">REQS</span>側でリードします。</p>
         </div>
       </div>
     </section>
@@ -1370,13 +1392,13 @@
             <div class="step-num">01</div>
             <div class="step-name">SNS運用代行<span class="en">— SNS Operation</span></div>
             <div class="step-body">企画立案・コンテンツ制作・投稿・コミュニティ運営・分析レポートまで一気通貫。X / Instagram / LinkedIn / Note 等に対応。AIで制作量と速度を担保。</div>
-            <div class="step-meta"><strong>Plan A</strong>月額 ¥400,000〜</div>
+            <div class="step-meta"><strong>Plan A</strong>運用代行プラン</div>
           </div>
           <div class="step reveal">
             <div class="step-num">02</div>
             <div class="step-name">広告運用代行<span class="en">— Paid Ads Operation</span></div>
             <div class="step-body">Google / Meta / TikTok / LinkedIn 広告のクリエイティブ制作・配信設計・予算最適化・レポーティング。AI生成バナー＋ABテストで改善サイクルを高速化。</div>
-            <div class="step-meta"><strong>Plan B</strong>月額 ¥400,000〜<br/>+ 広告費 20%</div>
+            <div class="step-meta"><strong>Plan B</strong>広告運用 + クリエイティブ制作</div>
           </div>
         </div>
       </div>
@@ -1396,19 +1418,18 @@
     </section>
   </div>
 
-  <!-- ============ SHARED: PRICING ============ -->
+  <!-- ============ SHARED: PLANS ============ -->
   <section class="pricing">
     <div class="pricing-bg"><em>plans</em></div>
     <div class="pricing-inner">
       <div class="pricing-head reveal">
-        <div class="section-tag">Plans & Pricing</div>
+        <div class="section-tag">Engagement Plans</div>
         <h2 class="section-title">3つの<em>導入プラン。</em></h2>
       </div>
       <div class="pricing-grid">
         <div class="plan reveal">
           <div class="plan-name italic">Starter</div>
           <div class="plan-jp">スターター</div>
-          <div class="plan-price">¥1.8M<span class="unit">〜</span></div>
           <div class="plan-period">単発 / 4-6 週間</div>
           <ul class="plan-features">
             <li>AX診断のみ</li>
@@ -1421,7 +1442,6 @@
           <div class="plan-badge">Recommended</div>
           <div class="plan-name italic">Standard</div>
           <div class="plan-jp">スタンダード</div>
-          <div class="plan-price">¥6M<span class="unit">〜</span></div>
           <div class="plan-period">3-6ヶ月 / 単一プロジェクト</div>
           <ul class="plan-features">
             <li>AX診断 + 社内AI導入</li>
@@ -1434,7 +1454,6 @@
         <div class="plan reveal">
           <div class="plan-name italic">Enterprise</div>
           <div class="plan-jp">エンタープライズ</div>
-          <div class="plan-price">Custom</div>
           <div class="plan-period">12ヶ月〜 / 年間契約</div>
           <ul class="plan-features">
             <li>4サービス フルスタック</li>
@@ -1445,6 +1464,10 @@
           </ul>
         </div>
       </div>
+      <p class="pricing-note reveal">
+        ※ 料金は要件によって変動するため、個別お見積りでご案内しています。<br>
+        まずは無料相談で課題感をお聞かせください。
+      </p>
     </div>
   </section>
 
@@ -1470,7 +1493,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q"><span>PoCで終わらないという保証はありますか？</span><span class="marker">+</span></div>
-          <div class="faq-a"><div class="faq-a-inner">REQSは契約段階で「本番運用 / 内製化」をゴールに設定します。PoCで止まらないよう、初期段階から本番運用を見据えた設計と、段階的なスコープ管理を行います。</div></div>
+          <div class="faq-a"><div class="faq-a-inner"><span class="brand-mark">REQS</span>は契約段階で「本番運用 / 内製化」をゴールに設定します。PoCで止まらないよう、初期段階から本番運用を見据えた設計と、段階的なスコープ管理を行います。</div></div>
         </div>
         <div class="faq-item">
           <div class="faq-q"><span>セキュリティ・コンプライアンス対応は？</span><span class="marker">+</span></div>
@@ -1503,7 +1526,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <span>© 2026 REQS. All rights reserved.</span>
+      <span>© 2026 <span class="brand-mark">REQS</span>. All rights reserved.</span>
       <span>Translate AI into Reality.</span>
     </div>
   </footer>
