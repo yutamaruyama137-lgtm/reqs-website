@@ -7,6 +7,16 @@
   <title>REQS — AI時代の翻訳者だ。</title>
   <meta name="description" content="REQS — AI時代の翻訳者だ。AI導入・DXコンサルティングを通じて、最新AIを企業の業務に使える形に翻訳して届ける。">
 
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="REQS — AI時代の翻訳者だ。">
+  <meta property="og:description" content="常に最新・最高のAIを、誰もが使いこなせる形に再解釈して届ける。AI体験をデザインする会社です。">
+  <meta property="og:image" content="https://www.reqs.jp/assets/ogp.png">
+  <meta property="og:url" content="https://www.reqs.jp/">
+  <meta property="og:site_name" content="REQS">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.reqs.jp/assets/ogp.png">
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/reqs-logo-white.svg">
   <link rel="alternate icon" type="image/png" href="assets/reqs-logo.png">
@@ -1286,6 +1296,11 @@
       font-size: clamp(48px, 8vw, 120px);
       font-weight: 700;
       color: var(--vermilion);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .loader-text.font-ready {
+      opacity: 1;
     }
     .loader-pct {
       position: absolute; bottom: 48px; right: 48px;
@@ -1985,6 +2000,10 @@
     // Loader
     const loader = document.getElementById('loader');
     const loaderPct = document.getElementById('loaderPct');
+    const loaderText = document.querySelector('.loader-text');
+    document.fonts.load('700 1em "Figtree"').then(() => {
+      loaderText && loaderText.classList.add('font-ready');
+    });
     let pct = 0;
     const ti = setInterval(() => {
       pct += Math.random() * 8 + 2;
