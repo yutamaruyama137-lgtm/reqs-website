@@ -396,6 +396,16 @@
       text-decoration-color: var(--vermilion);
       text-decoration-thickness: 2px;
       opacity: 0.45;
+      display: inline-block;
+      transform: translateX(-12px);
+      font-size: 0.62em;
+      white-space: nowrap;
+    }
+    /* 1行目・2行目の強調を同じ左位置に（2行目だけ左シフトだと1行目に「余白」に見える） */
+    .concept-jp-large > span.em:nth-of-type(2),
+    .concept-jp-large > span.em:nth-of-type(3) {
+      display: inline-block;
+      transform: translateX(-12px);
     }
     .concept-correction-arrow {
       display: block;
@@ -410,6 +420,7 @@
     .concept-correction-new {
       display: block;
       font-weight: 700;
+      white-space: nowrap;
     }
     .br-mobile { display: none; }
     .concept-body {
@@ -517,6 +528,19 @@
       letter-spacing: -0.03em;
     }
     .services-title em { font-style: italic; color: var(--vermilion); }
+
+    .services-header-lede {
+      font-family: var(--font-jp);
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--gray-500);
+      text-wrap: pretty;
+      overflow-wrap: break-word;
+    }
+    .services-lede-br-pc { display: none; }
+    @media (min-width: 901px) {
+      .services-lede-br-pc { display: block; }
+    }
 
     /* ---- 2-pillar service grid (AX × AIBPO) ---- */
     .service-pillars {
@@ -1006,6 +1030,36 @@
       font-style: normal;
     }
 
+    /* Mission 見出し：2行・各行が収まりやすいサイズ */
+    .manifesto.story-mode h2.manifesto-story-heading {
+      font-family: var(--font-jp);
+      font-weight: 600;
+      font-size: clamp(28px, 3.2vw, 52px);
+      line-height: 1.45;
+      letter-spacing: 0.03em;
+      max-width: 1100px;
+    }
+    .manifesto.story-mode h2.manifesto-story-heading .manifesto-story-row {
+      display: block;
+      white-space: nowrap;
+    }
+    .manifesto.story-mode h2.manifesto-story-heading em.manifesto-story-row {
+      font-style: normal;
+      color: var(--vermilion);
+      font-weight: 700;
+    }
+    .manifesto.story-mode h2.manifesto-story-heading .manifesto-story-row--outline {
+      margin-top: 0.2em;
+      -webkit-text-stroke: 1px var(--paper);
+      color: transparent;
+      font-weight: 600;
+    }
+    @media (max-width: 720px) {
+      .manifesto.story-mode h2.manifesto-story-heading .manifesto-story-row {
+        white-space: normal;
+      }
+    }
+
     /* ============ CTA ============ */
     .cta {
       padding: 200px 48px;
@@ -1375,6 +1429,10 @@
       .services { padding: 100px 0 0; }
       .services-header { padding: 0 20px 32px; grid-template-columns: 1fr; gap: 24px; }
       .services-title { font-size: clamp(36px, 9vw, 56px) !important; }
+      .manifesto.story-mode h2.manifesto-story-heading {
+        font-size: clamp(22px, 4.6vw, 34px) !important;
+        line-height: 1.42 !important;
+      }
       .service-pillars { gap: 40px; padding: 16px 20px 0; }
       .pillar { padding-top: 28px; }
       .pillar-tag { font-size: 10px; }
@@ -1587,14 +1645,7 @@
         </h2>
       </div>
       <div class="reveal">
-        <p class="concept-jp-large">
-          <span class="brand-mark">REQS</span>は、<br class="br-mobile"><span class="em">常に最新・最高のAIを</span><br>
-          <span class="em">誰もが使いこなせる形に<br class="br-mobile">再解釈して届ける</span>、<br>
-          <span class="concept-correction">
-            <span class="concept-correction-old">AI導入・DXコンサルティング</span>
-            <span class="concept-correction-new">AI体験をデザインする会社です。</span>
-          </span>
-        </p>
+        <p class="concept-jp-large"><span class="brand-mark">REQS</span>は<br><span class="em">常に最新・最高のAIを</span><br><span class="em">誰もが使いこなせる形に<br>再解釈して届ける</span><br><span class="concept-correction"><span class="concept-correction-old">AI導入・DXコンサルティング</span><span class="concept-correction-new">AI体験をデザインする会社です。</span></span></p>
         <p class="concept-body" style="margin-top: 40px;">
           技術と現場の間には、いつも「翻訳」が必要です。<br>
           ツール・プロンプト・API・データベース。<br>
@@ -1638,8 +1689,8 @@
         </h2>
       </div>
       <div class="reveal" style="padding-top: 56px;">
-        <p style="font-family: var(--font-jp); font-size: 16px; line-height: 1.9; color: var(--gray-500); text-wrap: pretty;">
-          <span class="brand-mark">REQS</span>は「内製化を支援するAX」、「AI・ロボットベンダーの普及BPO」、「AI文化を再定義するメディア」の3軸で、社会のAI Transformationを実現します。
+        <p class="services-header-lede">
+          <span class="brand-mark">REQS</span>は「内製化を支援するAX」、<wbr>「AI・ロボットベンダーの普及BPO」、<br class="services-lede-br-pc"><wbr>「AI文化を再定義するメディア」の3軸で、<wbr>社会のAI Transformationを実現します。
         </p>
       </div>
     </div>
@@ -1822,9 +1873,9 @@
     <div class="manifesto-bg"><em>mission</em></div>
     <div class="manifesto-inner">
       <div class="manifesto-tag">Mission & Story — なぜこの事業をやるのか</div>
-      <h2 class="services-title reveal" style="max-width: 1100px;">
-        <em>AIの知識と技術を意識させない体験で</em><br/>
-        <span class="stroke" style="-webkit-text-stroke: 1px var(--paper); color: transparent;">人間としての快適な生活を支える。</span>
+      <h2 class="services-title reveal manifesto-story-heading">
+        <em class="manifesto-story-row">AIの知識と技術を意識させない体験で</em>
+        <span class="manifesto-story-row manifesto-story-row--outline">人間としての快適な生活を支える。</span>
       </h2>
 
       <div class="values-grid">
