@@ -227,14 +227,34 @@
 
     .hero-meta {
       position: relative; z-index: 2;
-      display: flex; justify-content: space-between;
+      display: flex; justify-content: space-between; align-items: flex-start;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.14em;
+      font-size: 13px; letter-spacing: 0.14em;
       color: var(--gray-600);
       text-transform: uppercase;
       margin-bottom: auto;
     }
-    .hero-meta-right { text-align: right; }
+    .hero-meta-left {
+      display: flex; align-items: center; gap: 14px;
+      color: var(--paper);
+    }
+    .hero-meta-left .meta-bar {
+      display: inline-block;
+      width: 56px; height: 2px;
+      background: var(--vermilion);
+    }
+    .hero-meta-right {
+      text-align: right;
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: clamp(20px, 2vw, 32px);
+      letter-spacing: 0.01em;
+      color: var(--paper);
+      text-transform: none;
+      line-height: 1.25;
+      font-weight: 400;
+    }
+    .hero-meta-right em { color: var(--vermilion); font-style: italic; }
 
     .hero-content {
       position: relative; z-index: 2;
@@ -242,15 +262,7 @@
     }
 
     .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 12px; letter-spacing: 0.2em;
-      color: var(--vermilion);
-      margin-bottom: 32px;
-      text-transform: uppercase;
-      display: flex; align-items: center; gap: 16px;
-    }
-    .hero-eyebrow .line {
-      height: 1px; width: 60px; background: var(--vermilion);
+      display: none;
     }
 
     .hero-title {
@@ -272,33 +284,44 @@
     }
     .hero-jp {
       font-family: var(--font-jp);
-      font-size: clamp(16px, 1.6vw, 24px);
-      letter-spacing: 0.3em;
-      color: var(--gray-700);
+      font-size: clamp(20px, 2.2vw, 32px);
+      letter-spacing: 0.28em;
+      color: var(--paper);
       font-weight: 500;
-      margin-top: 40px;
+      margin-top: 56px;
       text-orientation: mixed;
     }
 
     .hero-bottom {
       position: relative; z-index: 2;
-      display: flex; justify-content: space-between; align-items: flex-end;
+      display: flex; justify-content: flex-end; align-items: flex-end;
       margin-top: 60px;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.14em;
-      color: var(--gray-600);
+      font-size: 13px; letter-spacing: 0.18em;
+      color: var(--paper);
       text-transform: uppercase;
+      transition: opacity 0.4s ease, transform 0.6s ease;
+    }
+    .hero-bottom.scrolled {
+      opacity: 0;
+      transform: translateX(80px);
+      pointer-events: none;
     }
     .hero-scroll {
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
       animation: bounce 2s infinite;
+      color: var(--paper);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.22em;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(8px); }
     }
     .hero-scroll-line {
-      width: 1px; height: 40px; background: var(--gray-600);
+      width: 1px; height: 56px; background: var(--paper);
+      opacity: 0.85;
     }
 
     /* ============ MARQUEE BAND ============ */
@@ -313,8 +336,12 @@
       display: flex; gap: 80px;
       animation: scroll-x 40s linear infinite;
       white-space: nowrap;
+      width: max-content;
     }
-    @keyframes scroll-x { to { transform: translateX(-50%); } }
+    @keyframes scroll-x {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
     .marquee-item {
       font-family: var(--font-en);
       font-style: italic;
@@ -322,12 +349,28 @@
       font-weight: 300;
       color: var(--paper);
       letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 56px;
+    }
+    .marquee-item .marquee-logo {
+      font-family: var(--font-brand);
+      font-weight: 800;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      color: var(--vermilion);
+      font-size: 0.85em;
+    }
+    .marquee-item .marquee-word {
+      font-family: var(--font-en);
+      font-style: italic;
+      color: var(--paper);
     }
     .marquee-item .star {
       color: var(--vermilion);
       font-style: normal;
-      margin: 0 40px;
       display: inline-block;
+      font-size: 0.7em;
       animation: spin 8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -341,41 +384,66 @@
       position: absolute;
       top: 40px; right: 48px;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
-      color: var(--gray-600);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--vermilion);
       text-transform: uppercase;
+      z-index: 5;
     }
+    .section-num em {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-weight: 400;
+      color: inherit;
+      margin-right: 4px;
+    }
+    .section-num--dark { color: var(--vermilion); }
 
     /* ============ ABOUT / CONCEPT ============ */
     .concept {
       scroll-margin-top: 80px;
-      padding: 200px 48px;
+      padding: 120px 48px 100px;
       position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .concept-eyebrow-top {
+      position: absolute;
+      top: 36px; left: 48px;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--vermilion);
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+      z-index: 5;
+    }
+    .concept-eyebrow-top em {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 22px;
+      color: inherit;
     }
     .concept-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 120px;
+      gap: 100px;
       max-width: 1600px; margin: 0 auto;
+      width: 100%;
     }
     .concept-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
-      color: var(--vermilion);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .concept-eyebrow::before {
-      content: '§'; font-family: var(--font-en); font-style: italic;
-      font-size: 18px;
+      display: none;
     }
     .concept-title {
       font-family: var(--font-en);
       font-weight: 300;
       font-size: clamp(48px, 6vw, 96px);
-      line-height: 1.08;
+      line-height: 1.28;
       letter-spacing: -0.03em;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
     .concept-title em {
       font-style: italic;
@@ -399,7 +467,7 @@
     .concept-correction {
       display: block;
       line-height: 1.6;
-      margin-top: 0.1em;
+      margin-top: 0.3em;
     }
     .concept-correction-old {
       text-decoration: line-through;
@@ -408,8 +476,9 @@
       opacity: 0.45;
       display: inline-block;
       transform: translateX(-12px);
-      font-size: 0.62em;
+      font-size: 0.78em;
       white-space: nowrap;
+      font-weight: 600;
     }
     /* 1行目・2行目の強調を同じ左位置に（2行目だけ左シフトだと1行目に「余白」に見える） */
     .concept-jp-large > span.em:nth-of-type(2),
@@ -429,8 +498,10 @@
     }
     .concept-correction-new {
       display: block;
-      font-weight: 700;
+      font-weight: 800;
       white-space: nowrap;
+      font-size: 1.05em;
+      letter-spacing: 0.02em;
     }
     .br-mobile { display: none; }
     .concept-body {
@@ -442,12 +513,15 @@
     }
     .concept-list {
       list-style: none;
-      margin-top: 40px;
+      margin-top: 28px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .concept-list li {
       display: grid; grid-template-columns: 60px 1fr;
       gap: 24px;
-      padding: 24px 0;
+      padding: 22px 0;
       border-top: 1px solid var(--rule);
     }
     .concept-list li:last-child { border-bottom: 1px solid var(--rule); }
@@ -458,53 +532,24 @@
     }
     .concept-list .text {
       font-family: var(--font-jp);
-      font-size: 18px; line-height: 1.85;
+      font-size: 17px; line-height: 1.7;
       color: var(--paper);
       font-weight: 500;
     }
 
     .concept-resolve {
       font-family: var(--font-jp);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--vermilion);
-      margin-top: 32px;
-      letter-spacing: 0.04em;
-    }
-
-    /* ============ KINETIC HEADLINE ============ */
-    .kinetic {
-      padding: 240px 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .kinetic-line {
-      display: block;
-      width: fit-content;
-      margin: 0 auto;
-      font-family: var(--font-en);
-      font-weight: 300;
-      font-size: clamp(68px, 13vw, 220px);
-      line-height: 0.9;
-      letter-spacing: -0.05em;
-      white-space: nowrap;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-    }
-    .kinetic-line .it { font-style: italic; color: var(--vermilion); }
-    .kinetic-line .stroke {
-      -webkit-text-stroke: 1px var(--paper);
-      color: transparent;
-    }
-    .kinetic-jp {
-      font-family: var(--font-jp);
-      font-size: clamp(20px, 2vw, 30px);
-      color: var(--paper-2);
-      letter-spacing: 0.3em;
-      text-wrap: balance;
+      font-size: 16px;
+      line-height: 1.95;
       font-weight: 500;
-      margin-top: 140px;
+      color: var(--paper-2);
+      margin-top: 28px;
+      letter-spacing: 0.03em;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
+      text-wrap: pretty;
     }
 
     /* ============ SERVICES (List, hover-reveal) ============ */
@@ -533,16 +578,16 @@
     .services-title {
       font-family: var(--font-en);
       font-weight: 300;
-      font-size: clamp(48px, 6vw, 96px);
-      line-height: 0.95;
+      font-size: clamp(56px, 7vw, 112px);
+      line-height: 0.98;
       letter-spacing: -0.03em;
     }
     .services-title em { font-style: italic; color: var(--vermilion); }
 
     .services-header-lede {
       font-family: var(--font-jp);
-      font-size: 16px;
-      line-height: 1.9;
+      font-size: 18px;
+      line-height: 1.95;
       color: var(--gray-500);
       text-wrap: pretty;
       overflow-wrap: break-word;
@@ -571,30 +616,32 @@
     }
     .pillar-tag {
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.24em;
+      font-size: 13px; letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--vermilion);
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 18px;
     }
     .pillar-tag .pillar-axis {
-      font-family: var(--font-en); font-style: italic;
-      font-size: 13px;
+      font-family: var(--font-jp);
+      font-weight: 600;
+      font-size: 14px;
       color: var(--gray-500);
-      letter-spacing: 0;
+      letter-spacing: 0.08em;
     }
     .pillar-title {
       font-family: var(--font-en); font-weight: 300;
-      font-size: clamp(32px, 3.4vw, 52px);
+      font-size: clamp(38px, 4vw, 60px);
       line-height: 1.05; letter-spacing: -0.02em;
       color: var(--ink);
+      white-space: nowrap;
     }
     .pillar-title em { font-style: italic; color: var(--vermilion); }
     .pillar-jp {
       font-family: var(--font-jp);
-      font-size: 14px; line-height: 1.95;
+      font-size: 16px; line-height: 1.95;
       color: var(--gray-500);
-      max-width: 480px;
+      max-width: 540px;
       justify-self: end;
       align-self: end;
       text-wrap: balance;
@@ -644,31 +691,29 @@
     }
     .svc-card.is-disabled:hover::before { opacity: 0; }
     .svc-card.is-disabled .svc-card-cta { color: var(--gray-600); opacity: 0.6; }
-    .svc-card.is-disabled .svc-card-cta-arrow { color: var(--gray-600); }
-    .svc-card.is-disabled:hover .svc-card-cta-arrow { transform: none; }
     .svc-card > * { position: relative; z-index: 1; }
     .svc-card-main { display: contents; }
     .svc-card-num {
-      font-family: var(--font-en); font-style: italic;
-      font-size: 14px; color: var(--vermilion);
-      letter-spacing: 0.02em;
-      margin-bottom: 28px;
-    }
-    .svc-card-title {
-      font-family: var(--font-jp); font-weight: 800;
-      font-size: clamp(26px, 2.1vw, 32px); line-height: 1.35;
-      letter-spacing: 0.02em;
-      color: var(--paper);
-      margin-bottom: 8px;
+      display: none;
     }
     .svc-card-en {
       font-family: var(--font-en); font-style: italic;
-      font-size: 13px; color: var(--gray-700);
+      font-size: clamp(15px, 1.2vw, 18px);
+      color: var(--vermilion);
+      letter-spacing: 0.01em;
+      margin-bottom: 12px;
+      white-space: nowrap;
+    }
+    .svc-card-title {
+      font-family: var(--font-jp); font-weight: 800;
+      font-size: clamp(28px, 2.3vw, 36px); line-height: 1.35;
+      letter-spacing: 0.02em;
+      color: var(--paper);
       margin-bottom: 20px;
     }
     .svc-card-desc {
       font-family: var(--font-jp);
-      font-size: 13px; line-height: 1.9;
+      font-size: 15px; line-height: 1.9;
       color: var(--gray-700);
       margin-bottom: 20px;
       text-wrap: pretty;
@@ -681,14 +726,15 @@
     }
     .svc-card-subs li {
       font-family: var(--font-jp);
-      font-size: 12px; line-height: 1.7;
+      font-size: 14px; line-height: 1.7;
       color: var(--paper);
       padding: 4px 0;
       display: flex; gap: 10px;
     }
     .svc-card-subs li::before {
-      content: '↳'; color: var(--vermilion);
+      content: '·'; color: var(--vermilion);
       font-family: var(--font-mono);
+      font-weight: bold;
     }
     .svc-card-cta {
       margin-top: 20px;
@@ -701,11 +747,6 @@
       transition: opacity 0.4s;
     }
     .svc-card:hover .svc-card-cta { opacity: 1; }
-    .svc-card-cta-arrow {
-      color: var(--vermilion);
-      transition: transform 0.4s;
-    }
-    .svc-card:hover .svc-card-cta-arrow { transform: translateX(6px); }
 
     /* WEBマーケティング card: wide layout when alone */
     .pillar-cards.cols-1 .svc-card {
@@ -1397,6 +1438,7 @@
       .hero { padding: 120px 32px 70px; }
       .pillar-cards { grid-template-columns: repeat(2, 1fr); }
       .pillar-header { grid-template-columns: 1fr; gap: 16px; }
+      .pillar-title { white-space: normal; font-size: clamp(32px, 4.4vw, 48px); }
       .pillar-jp { justify-self: start; max-width: 100%; }
       .footer-meta { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
       .numbers-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1415,10 +1457,12 @@
       /* Hero */
       .hero { padding: 110px 20px 60px; min-height: auto; }
       .hero-title { font-size: clamp(54px, 16vw, 96px) !important; line-height: 0.95 !important; }
-      .hero-jp { font-size: 16px !important; letter-spacing: 0.04em !important; font-weight: 500 !important; }
-      .hero-meta { font-size: 10px; flex-direction: column; gap: 8px; }
-      .hero-meta-right { text-align: left; }
-      .hero-bottom, .hero-scroll { display: none; }
+      .hero-jp { font-size: 17px !important; letter-spacing: 0.06em !important; font-weight: 500 !important; margin-top: 36px !important; color: var(--paper) !important; }
+      .hero-meta { font-size: 11px; flex-direction: column; gap: 14px; align-items: flex-start; }
+      .hero-meta-left .meta-bar { width: 36px; }
+      .hero-meta-right { text-align: left; font-size: 16px; }
+      .hero-bottom { justify-content: flex-start; }
+      .hero-bottom, .hero-scroll { display: flex; }
 
       /* Ticker */
       .ticker { font-size: 10px; padding: 6px 0; }
@@ -1428,17 +1472,18 @@
       .loader-pct { right: 20px; bottom: 24px; }
 
       /* Common section spacing */
-      .concept { padding: 80px 20px; }
+      .concept { padding: 90px 20px 60px; min-height: auto; }
+      .concept-eyebrow-top { top: 24px; left: 20px; font-size: 14px; }
+      .concept-eyebrow-top em { font-size: 18px; }
       .concept-grid { grid-template-columns: 1fr; gap: 40px; }
       .concept-jp-large { font-size: clamp(20px, 5.2vw, 28px) !important; line-height: 1.8 !important; }
       .concept-jp-large .em { font-size: 1.1em !important; }
       .br-pc { display: none; }
       .br-mobile { display: initial; }
       .concept-body { font-size: 16px !important; }
-      .concept-list .text { font-size: 16px !important; }
-      .kinetic { padding: 80px 20px; }
-      .kinetic-line { font-size: clamp(36px, 11vw, 64px); line-height: 1.1; }
-      .kinetic-jp { font-size: clamp(15px, 4vw, 20px) !important; letter-spacing: 0.18em !important; }
+      .concept-list { margin-top: 16px; }
+      .concept-list .text { font-size: 15px !important; }
+      .concept-resolve { font-size: 14px !important; line-height: 1.85 !important; margin-top: 24px !important; }
 
       /* Services & Pillars */
       .services { padding: 100px 0 0; }
@@ -1451,12 +1496,13 @@
       .service-pillars { gap: 40px; padding: 16px 20px 0; }
       .pillar { padding-top: 28px; }
       .pillar-tag { font-size: 10px; }
-      .pillar-title { font-size: clamp(28px, 8vw, 44px) !important; }
-      .pillar-jp { font-size: 13px; }
+      .pillar-title { font-size: clamp(26px, 7vw, 38px) !important; white-space: normal !important; line-height: 1.15 !important; }
+      .pillar-jp { font-size: 14px; }
       .pillar-cards { grid-template-columns: 1fr; gap: 12px; }
       .svc-card { min-height: auto; padding: 24px 20px; }
-      .svc-card-num { margin-bottom: 16px; }
-      .svc-card-title { font-size: 24px; font-weight: 800; }
+      .svc-card-en { font-size: 14px !important; white-space: normal !important; }
+      .svc-card-title { font-size: 26px; font-weight: 800; margin-bottom: 14px; }
+      .svc-card-desc { font-size: 14px !important; }
       .pillar-cards.cols-1 .svc-card {
         grid-template-columns: 1fr; gap: 20px; padding: 24px 20px;
       }
@@ -1509,7 +1555,8 @@
       .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; padding-top: 32px; margin-top: 32px; font-size: 10px; }
 
       /* Section numbers (decorative §) */
-      .section-num { font-size: 9px !important; padding: 0 20px; }
+      .section-num { font-size: 13px !important; top: 24px !important; right: 20px !important; padding: 0; }
+      .section-num em { font-size: 16px !important; }
 
       /* Misc */
       .reveal { transform: translateY(20px); }
@@ -1522,7 +1569,7 @@
       .hero { padding: 96px 16px 48px; }
       .hero-title { font-size: clamp(44px, 14vw, 72px) !important; }
       .hero-meta { font-size: 9px; }
-      .concept, .kinetic, .works, .numbers, .manifesto, .cta { padding-left: 16px; padding-right: 16px; }
+      .concept, .works, .numbers, .manifesto, .cta { padding-left: 16px; padding-right: 16px; }
       .service-pillars { padding: 12px 16px 0; }
       .svc-card { padding: 20px 16px; }
       .pillar-cards.cols-1 .svc-card { padding: 20px 16px; }
@@ -1599,21 +1646,17 @@
   <section class="hero" data-screen-label="Hero">
     <div class="hero-bg-video"></div>
     <div class="hero-meta">
-      <div>
-        <span class="brand-mark">REQS</span> / TOKYO・SENDAI<br/>
-        ESTD. 2026
+      <div class="hero-meta-left">
+        <span class="meta-bar"></span>
+        <span><span class="brand-mark">REQS</span> / TOKYO・SENDAI &nbsp; ESTD. 2026</span>
       </div>
       <div class="hero-meta-right">
-        AI Implementation<br/>
-        Est. 2026
+        Translate <em>AI</em><br/>
+        into <em>reality.</em>
       </div>
     </div>
 
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="line"></span>
-        <span>3 Pillars × AI Implementation</span>
-      </div>
       <h1 class="hero-title">
         <span class="it">Interpreter</span><br/>
         <span class="stroke">of the</span><br/>
@@ -1622,19 +1665,10 @@
       <p class="hero-jp">私 た ち は &ensp; A I 時 代 の &ensp; 翻 訳 者 だ。</p>
     </div>
 
-    <div class="hero-bottom">
-      <div>
-        AX — AI Transformation<br/>
-        AIBPO — Business Process Outsourcing<br/>
-        Media — Content & Community
-      </div>
+    <div class="hero-bottom" id="heroBottom">
       <div class="hero-scroll">
         <span>Scroll</span>
         <div class="hero-scroll-line"></div>
-      </div>
-      <div style="text-align:right">
-        Translate AI<br/>
-        into reality.
       </div>
     </div>
   </section>
@@ -1642,70 +1676,108 @@
   <!-- Marquee Band -->
   <section class="marquee">
     <div class="marquee-track">
-      <span class="marquee-item"><em>Translate</em><span class="star">✦</span>Every <em>AI</em><span class="star">✧</span>Into <em>Reality</em><span class="star">✦</span></span>
-      <span class="marquee-item"><em>Translate</em><span class="star">✦</span>Every <em>AI</em><span class="star">✧</span>Into <em>Reality</em><span class="star">✦</span></span>
+      <span class="marquee-item">
+        <span class="marquee-logo">REQS</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Robot</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Energy</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Quantum</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Space</span>
+        <span class="star">✦</span>
+      </span>
+      <span class="marquee-item">
+        <span class="marquee-logo">REQS</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Robot</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Energy</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Quantum</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Space</span>
+        <span class="star">✦</span>
+      </span>
+      <span class="marquee-item" aria-hidden="true">
+        <span class="marquee-logo">REQS</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Robot</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Energy</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Quantum</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Space</span>
+        <span class="star">✦</span>
+      </span>
+      <span class="marquee-item" aria-hidden="true">
+        <span class="marquee-logo">REQS</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Robot</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Energy</span>
+        <span class="star">✦</span>
+        <span class="marquee-word">Quantum</span>
+        <span class="star">✧</span>
+        <span class="marquee-word">Space</span>
+        <span class="star">✦</span>
+      </span>
     </div>
   </section>
 
   <!-- Concept -->
-  <section class="concept" id="about" data-screen-label="About">
-    <div class="section-num">§ 01 / Concept</div>
+  <section class="concept" id="about" data-screen-label="Concept">
+    <div class="concept-eyebrow-top"><em>§</em> Concept</div>
     <div class="concept-grid">
       <div class="reveal">
-        <div class="concept-eyebrow">About <span class="brand-mark">REQS</span></div>
         <h2 class="concept-title">
           We bridge<br/>
-          the gap between<br/>
+          the gap<br/>
+          between<br/>
           <em>AI</em> and <em>reality.</em>
         </h2>
       </div>
       <div class="reveal">
         <p class="concept-jp-large"><span class="brand-mark">REQS</span>は<br><span class="em">常に最新・最高のAIを</span><br><span class="em">誰もが使いこなせる形に<br>再解釈して届ける</span><br><span class="concept-correction"><span class="concept-correction-old">AI導入・DXコンサルティング</span><span class="concept-correction-new">AI体験をデザインする会社です。</span></span></p>
-        <p class="concept-body" style="margin-top: 40px;">
-          技術と現場の間には、いつも「翻訳」が必要です。<br>
-          ツール・プロンプト・API・データベース。<br>
-          それらをすべて束ね、人類が"身体の一部"として扱えるようにするのが私たちの仕事です。
-        </p>
-        <ul class="concept-list">
-          <li>
-            <span class="num">01</span>
-            <span class="text">AIの情報量が多く、消費期限が短い。</span>
-          </li>
-          <li>
-            <span class="num">02</span>
-            <span class="text">APIやプロンプトなどを使いこなす専門技術が求められる。</span>
-          </li>
-          <li>
-            <span class="num">03</span>
-            <span class="text">結局、AI導入で業務・管理コストが増えてしまう。</span>
-          </li>
-        </ul>
-        <p class="concept-resolve">これを私たちは解決します。</p>
       </div>
     </div>
-  </section>
-
-  <!-- Kinetic Headline -->
-  <section class="kinetic">
-    <div class="kinetic-line" id="kineticLine1"><span class="it">Translate</span> &nbsp;✦&nbsp; <span class="stroke">Every</span> &nbsp;✦&nbsp; <span class="it">AI</span></div>
-    <div class="kinetic-line" id="kineticLine2" style="margin-top: -0.1em;"><span class="stroke">into</span> &nbsp;<span class="it">reality</span><span style="color:var(--vermilion);font-style:normal">.</span></div>
-    <p class="kinetic-jp">最新AIを、企業の業務に「使える形」に翻訳して届ける。</p>
+    <ul class="concept-list reveal" style="margin-top: 64px;">
+      <li>
+        <span class="num">01</span>
+        <span class="text">AIの情報量が多く、消費期限が短い。</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="text">APIやプロンプトなどを使いこなす専門技術が求められる。</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="text">結局、AI導入で業務・管理コストが増えてしまう。</span>
+      </li>
+    </ul>
+    <p class="concept-resolve reveal">
+      技術と現場の間には、いつも「翻訳」が必要です。<br>
+      ツール・プロンプト・API・データベース。<br>
+      それらをすべて束ね、人類が"身体の一部"として扱えるようにするのが私たちの仕事です。
+    </p>
   </section>
 
   <!-- Services List -->
   <section class="services" id="services" data-screen-label="Services">
-    <div class="section-num" style="color: var(--gray-500);">§ 02 / What we do</div>
+    <div class="section-num section-num--dark"><em>§</em> Services</div>
     <div class="services-header">
       <div class="reveal">
         <div class="services-tag">Services</div>
         <h2 class="services-title">
-          Three axes,<br/>
+          Three services,<br/>
           one <em>transformation.</em>
         </h2>
       </div>
       <div class="reveal" style="padding-top: 56px;">
         <p class="services-header-lede">
-          <span class="brand-mark">REQS</span>は「内製化を支援するAX」、<wbr>「AI・ロボットベンダーの普及BPO」、<br class="services-lede-br-pc"><wbr>「AI文化を再定義するメディア」の3軸で、<wbr>社会のAI Transformationを実現します。
+          <span class="brand-mark">REQS</span>は「内製化を支援するAX」、<wbr>「AI・ロボットベンダーの普及BPO」、<br class="services-lede-br-pc"><wbr>「AI文化を再定義するメディア」の3つの事業で、<wbr>社会のAI Transformationを実現します。
         </p>
       </div>
     </div>
@@ -1717,7 +1789,7 @@
           <div>
             <div class="pillar-tag">
               <span>Pillar A</span>
-              <span class="pillar-axis">/ axis 01</span>
+              <span class="pillar-axis">診断 → 導入 → 自動化 → 定着</span>
             </div>
             <h3 class="pillar-title"><em>AX</em> — AI Transformation</h3>
           </div>
@@ -1727,36 +1799,32 @@
         </div>
         <div class="pillar-cards">
           <div class="svc-card" data-preview-title="AX診断" data-preview-copy="課題の可視化からロードマップ設計まで。">
-            <div class="svc-card-num">A.01</div>
-            <h4 class="svc-card-title">AX診断</h4>
             <div class="svc-card-en">Consulting & Roadmap</div>
+            <h4 class="svc-card-title">AX診断</h4>
             <p class="svc-card-desc">
               ITポートフォリオ・業務プロセス・組織構造を診断し、AI活用ロードマップを提示。100以上のツールから最適選定。
             </p>
           </div>
 
           <div class="svc-card" data-preview-title="社内AI導入" data-preview-copy="安全な社内利用ルール、導入設計、定着まで。">
-            <div class="svc-card-num">A.02</div>
-            <h4 class="svc-card-title">社内AI導入</h4>
             <div class="svc-card-en">In-house AI Install</div>
+            <h4 class="svc-card-title">社内AI導入</h4>
             <p class="svc-card-desc">
               最適化された安全なAIを社内導入し、利用環境の構築・ガイドライン策定・運用設計を一気通貫で行い、社員の負担を削減。
             </p>
           </div>
 
           <div class="svc-card" data-preview-title="業務自動化" data-preview-copy="実運用にどう組み込むかを業務フロー別に紹介。">
-            <div class="svc-card-num">A.03</div>
-            <h4 class="svc-card-title">業務自動化</h4>
             <div class="svc-card-en">Operational Automation</div>
+            <h4 class="svc-card-title">業務自動化</h4>
             <p class="svc-card-desc">
               既存業務にAIを組み込み、繰り返し作業をゼロに。Webアプリ・DB統合・ワークフロー自動化を実装。
             </p>
           </div>
 
           <div class="svc-card" data-preview-title="定着支援" data-preview-copy="研修・運用・評価設計まで、導入後の成果継続支援。">
-            <div class="svc-card-num">A.04</div>
-            <h4 class="svc-card-title">定着支援</h4>
             <div class="svc-card-en">AI Enablement</div>
+            <h4 class="svc-card-title">定着支援</h4>
             <p class="svc-card-desc">
               持続可能なAI環境を社内から醸成。研修・伴走・内製化を組み合わせ、外注に依存しない自走チームを立ち上げる。
             </p>
@@ -1770,9 +1838,9 @@
           <div>
             <div class="pillar-tag">
               <span>Pillar B</span>
-              <span class="pillar-axis">/ axis 02</span>
+              <span class="pillar-axis">マーケティング・営業を代行</span>
             </div>
-            <h3 class="pillar-title"><em>BPO</em> — Business Process Outsourcing</h3>
+            <h3 class="pillar-title"><em>BPO</em>&nbsp;—&nbsp;Business&nbsp;Process&nbsp;Outsourcing</h3>
           </div>
           <p class="pillar-jp">
             自社で抱えにくい業務は<span class="brand-mark">REQS</span>へ。AIを活かした業務代行で、企業のリソースをコアバリュー創出に集中させる。
@@ -1781,9 +1849,8 @@
         <div class="pillar-cards cols-1">
           <div class="svc-card" data-preview-title="WEBマーケティング" data-preview-copy="SNS運用と広告運用をAI活用で再現性高く実行。">
             <div class="svc-card-main">
-              <div class="svc-card-num">B.01</div>
-              <h4 class="svc-card-title">WEBマーケティング</h4>
               <div class="svc-card-en">Web Marketing</div>
+              <h4 class="svc-card-title">WEBマーケティング</h4>
               <p class="svc-card-desc">
               認知獲得からリード、商談化まで。AIを駆使したマーケティングオートメーションで、再現性のある集客の仕組みを構築・運用代行します。
               </p>
@@ -1800,9 +1867,8 @@
         <div class="pillar-cards cols-1" style="margin-top: 16px;">
           <div class="svc-card" data-preview-title="国内・海外営業支援" data-preview-copy="AI・ロボットベンダー企業の営業活動を国内外で代行します。">
             <div class="svc-card-main">
-              <div class="svc-card-num">B.02</div>
-              <h4 class="svc-card-title">国内・海外営業支援</h4>
               <div class="svc-card-en">Domestic &amp; Global Sales Support</div>
+              <h4 class="svc-card-title">国内・海外営業支援</h4>
               <p class="svc-card-desc">
                 AI・ロボットベンダー企業の営業・マーケティング活動を代行。貴社のテクノロジーを必要としている企業へ、国内外問わず最短距離で届けます。
               </p>
@@ -1822,26 +1888,24 @@
           <div>
             <div class="pillar-tag">
               <span>Pillar C</span>
-              <span class="pillar-axis">/ axis 03</span>
+              <span class="pillar-axis">REQSが自社で展開する</span>
             </div>
-            <h3 class="pillar-title"><em>Culture</em> — Media &amp; Community</h3>
+            <h3 class="pillar-title"><em>Culture</em>&nbsp;—&nbsp;Media&nbsp;&amp;&nbsp;Community</h3>
           </div>
           <p class="pillar-jp">
-            AIをテーマに、発信・討論・対談を通じてコミュニティと知識の循環を生み出す。
+            <span class="brand-mark">REQS</span>が自社で展開する、AI時代のカルチャー発信プロジェクト。AIをテーマに、発信・討論・対談を通じてコミュニティと知識の循環を生み出す。
           </p>
         </div>
         <div class="pillar-cards cols-1">
           <div class="svc-card is-disabled" data-preview-title="メディア事業" data-preview-copy="AI技術発信・討論・ポッドキャスト。準備中です。">
             <div class="svc-card-main">
-              <div class="svc-card-num">C.01</div>
-              <h4 class="svc-card-title">メディア事業</h4>
               <div class="svc-card-en">Media Business</div>
+              <h4 class="svc-card-title">メディア事業</h4>
               <p class="svc-card-desc">
-              AIを活用した発信・討論・対談を通じて、コミュニティと知識の循環を生み出すメディアブランドを展開します。
+              <span class="brand-mark">REQS</span>が自社で展開する、AI時代のカルチャー発信プロジェクト。AIを活用した発信・討論・対談を通じて、コミュニティと知識の循環を生み出すメディアブランドを育てます。
               </p>
               <div class="svc-card-cta">
-                <span>Coming Soon...</span>
-                <span class="svc-card-cta-arrow">·</span>
+                <span>Coming Soon</span>
               </div>
             </div>
             <ul class="svc-card-subs">
@@ -1884,12 +1948,13 @@
 
   <!-- Manifesto / Values -->
   <section class="manifesto story-mode" id="values" data-screen-label="Mission">
+    <div class="section-num"><em>§</em> Mission</div>
     <div class="manifesto-bg"><em>mission</em></div>
     <div class="manifesto-inner">
       <div class="manifesto-tag">Mission & Story — なぜこの事業をやるのか</div>
       <h2 class="services-title reveal manifesto-story-heading">
         <em class="manifesto-story-row">AIの知識と技術を意識させない体験で</em>
-        <span class="manifesto-story-row manifesto-story-row--outline">人間としての快適な生活を支える。</span>
+        <span class="manifesto-story-row manifesto-story-row--outline">「人間」としての快適な生活を支える。</span>
       </h2>
 
       <div class="values-grid">
@@ -1900,12 +1965,12 @@
         </div>
         <div class="value reveal">
           <div class="value-num"><span>Chapter 02</span></div>
-          <h4 class="value-title">翻訳者として、技術と業務のあいだに立つ。</h4>
+          <h4 class="value-title">技術と人間のあいだに立つ。</h4>
           <p class="value-body"><span class="brand-mark">REQS</span>は、最新のAI技術をそのまま渡す会社ではありません。<br>業務・組織・運用の文脈に合わせて、実際に使える形へデザインする会社です。<br>診断、導入、業務実装、定着までを一つの流れで支援し、現場に残る変革を起こします。</p>
         </div>
         <div class="value reveal">
           <div class="value-num"><span>Chapter 03</span></div>
-          <h4 class="value-title">目指すのは、誰かの業務が確かに前へ進むこと。</h4>
+          <h4 class="value-title">目指すのは、人々の生活を豊かにすること。</h4>
           <p class="value-body">私たちのミッションは、AIを導入すること自体ではなく、人々の暮らしをAIで支えることです。<br>人間の負荷を減らし、挑戦できる時間を増やす。<br>その積み重ねが、私たちの未来を強くすると信じています。</p>
         </div>
       </div>
@@ -1914,7 +1979,8 @@
 
   <!-- CTA -->
   <section class="cta" id="contact" data-screen-label="Contact">
-    <div class="cta-eyebrow reveal">§ 04 — Get in Touch</div>
+    <div class="section-num"><em>§</em> Contact</div>
+    <div class="cta-eyebrow reveal">Get in Touch</div>
     <h2 class="cta-title reveal">
       <em>Ready</em><br/>
       to <em>Create?</em>
@@ -2056,38 +2122,22 @@
       cursor.style.display = 'none';
     }
 
+    // Hero scroll indicator: hide to the right on scroll
+    const heroBottom = document.getElementById('heroBottom');
+    if (heroBottom) {
+      const updateHeroScroll = () => {
+        if (window.scrollY > 40) heroBottom.classList.add('scrolled');
+        else heroBottom.classList.remove('scrolled');
+      };
+      updateHeroScroll();
+      window.addEventListener('scroll', updateHeroScroll, { passive: true });
+    }
+
     // Reveal observer
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // Kinetic line scroll - keep full text visible near center
-    const k1 = document.getElementById('kineticLine1');
-    const k2 = document.getElementById('kineticLine2');
-    const kineticSection = k1 ? k1.closest('.kinetic') : null;
-    let kTicking = false;
-    const syncKinetic = () => {
-      if (!kineticSection) return;
-      const rect = kineticSection.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
-      const centerDelta = Math.abs((rect.top + rect.height / 2) - vh / 2);
-      let offset = (progress - 0.5) * 110;
-      if (centerDelta < vh * 0.12) offset = 0;
-      if (k1) k1.style.transform = `translateX(${-offset}px)`;
-      if (k2) k2.style.transform = `translateX(${offset}px)`;
-    };
-    window.addEventListener('scroll', () => {
-      if (!kineticSection || kTicking) return;
-      kTicking = true;
-      requestAnimationFrame(() => {
-        syncKinetic();
-        kTicking = false;
-      });
-    });
-    window.addEventListener('resize', syncKinetic);
-    syncKinetic();
 
     // Service hover preview card
     const serviceRows = document.querySelectorAll('.service-row');
