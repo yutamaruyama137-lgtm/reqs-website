@@ -138,7 +138,7 @@
     .nav-links {
       display: flex; gap: 36px;
       font-family: var(--font-sans);
-      font-size: 12px; letter-spacing: 0.18em;
+      font-size: 14px; letter-spacing: 0.18em;
       text-transform: uppercase;
     }
     .nav-links a {
@@ -156,7 +156,7 @@
 
     .nav-cta {
       font-family: var(--font-sans);
-      font-size: 12px; letter-spacing: 0.18em;
+      font-size: 14px; letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 12px 22px;
       border: 1px solid currentColor;
@@ -174,7 +174,7 @@
       background: var(--vermilion);
       color: var(--paper);
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 0.14em;
       padding: 8px 0;
       overflow: hidden;
@@ -382,19 +382,21 @@
 
     .section-num {
       position: absolute;
-      top: 40px; right: 48px;
+      top: 56px; left: 48px;
       font-family: var(--font-mono);
-      font-size: 18px;
+      font-size: 22px;
       font-weight: 500;
       letter-spacing: 0.18em;
       color: var(--vermilion);
       text-transform: uppercase;
+      display: flex; align-items: center; gap: 12px;
       z-index: 5;
     }
     .section-num em {
       font-family: var(--font-en);
       font-style: italic;
       font-weight: 400;
+      font-size: 28px;
       color: inherit;
       margin-right: 4px;
     }
@@ -403,7 +405,7 @@
     /* ============ ABOUT / CONCEPT ============ */
     .concept {
       scroll-margin-top: 80px;
-      padding: 120px 48px 100px;
+      padding: 220px 48px 180px;
       position: relative;
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -411,21 +413,21 @@
     }
     .concept-eyebrow-top {
       position: absolute;
-      top: 36px; left: 48px;
+      top: 56px; left: 48px;
       font-family: var(--font-mono);
-      font-size: 18px;
+      font-size: 22px;
       font-weight: 500;
       letter-spacing: 0.18em;
       color: var(--vermilion);
       text-transform: uppercase;
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 12px;
       z-index: 5;
     }
     .concept-eyebrow-top em {
       font-family: var(--font-en);
       font-style: italic;
       font-weight: 400;
-      font-size: 22px;
+      font-size: 28px;
       color: inherit;
     }
     .concept-grid {
@@ -433,6 +435,7 @@
       gap: 100px;
       max-width: 1600px; margin: 0 auto;
       width: 100%;
+      padding-top: 64px;
     }
     .concept-eyebrow {
       display: none;
@@ -443,6 +446,7 @@
       font-size: clamp(48px, 6vw, 96px);
       line-height: 1.28;
       letter-spacing: -0.03em;
+      margin-top: 40px;
       margin-bottom: 40px;
     }
     .concept-title em {
@@ -467,7 +471,8 @@
     .concept-correction {
       display: block;
       line-height: 1.6;
-      margin-top: 0.3em;
+      margin-top: 0.6em;
+      margin-bottom: 2em;
     }
     .concept-correction-old {
       text-decoration: line-through;
@@ -532,14 +537,14 @@
     }
     .concept-list .text {
       font-family: var(--font-jp);
-      font-size: 17px; line-height: 1.7;
+      font-size: 18px; line-height: 1.8;
       color: var(--paper);
       font-weight: 500;
     }
 
     .concept-resolve {
       font-family: var(--font-jp);
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.95;
       font-weight: 500;
       color: var(--paper-2);
@@ -554,7 +559,7 @@
 
     /* ============ SERVICES (List, hover-reveal) ============ */
     .services {
-      padding: 200px 0 120px;
+      padding: 220px 0 120px;
       background: var(--paper);
       color: var(--ink);
     }
@@ -564,17 +569,7 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 80px;
     }
-    .services-tag {
-      font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
-      color: var(--vermilion);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .services-tag::before {
-      content: '§'; font-family: var(--font-en); font-style: italic; font-size: 18px;
-    }
+    .services-tag { display: none; }
     .services-title {
       font-family: var(--font-en);
       font-weight: 300;
@@ -610,25 +605,18 @@
       padding-top: 40px;
     }
     .pillar-header {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 48px; align-items: end;
+      display: block;
       margin-bottom: 32px;
     }
     .pillar-tag {
       font-family: var(--font-mono);
-      font-size: 13px; letter-spacing: 0.22em;
+      font-size: 16px; letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--vermilion);
       display: flex; align-items: center; gap: 14px;
       margin-bottom: 18px;
     }
-    .pillar-tag .pillar-axis {
-      font-family: var(--font-jp);
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--gray-500);
-      letter-spacing: 0.08em;
-    }
+    .pillar-tag .pillar-axis { display: none; }
     .pillar-title {
       font-family: var(--font-en); font-weight: 300;
       font-size: clamp(38px, 4vw, 60px);
@@ -637,15 +625,7 @@
       white-space: nowrap;
     }
     .pillar-title em { font-style: italic; color: var(--vermilion); }
-    .pillar-jp {
-      font-family: var(--font-jp);
-      font-size: 16px; line-height: 1.95;
-      color: var(--gray-500);
-      max-width: 540px;
-      justify-self: end;
-      align-self: end;
-      text-wrap: balance;
-    }
+    .pillar-jp { display: none; }
 
     .pillar-cards {
       display: grid;
@@ -698,7 +678,7 @@
     }
     .svc-card-en {
       font-family: var(--font-en); font-style: italic;
-      font-size: clamp(15px, 1.2vw, 18px);
+      font-size: clamp(16px, 1.2vw, 20px);
       color: var(--vermilion);
       letter-spacing: 0.01em;
       margin-bottom: 12px;
@@ -713,7 +693,7 @@
     }
     .svc-card-desc {
       font-family: var(--font-jp);
-      font-size: 15px; line-height: 1.9;
+      font-size: 16px; line-height: 1.9;
       color: var(--gray-700);
       margin-bottom: 20px;
       text-wrap: pretty;
@@ -726,7 +706,7 @@
     }
     .svc-card-subs li {
       font-family: var(--font-jp);
-      font-size: 14px; line-height: 1.7;
+      font-size: 16px; line-height: 1.7;
       color: var(--paper);
       padding: 4px 0;
       display: flex; gap: 10px;
@@ -739,7 +719,7 @@
     .svc-card-cta {
       margin-top: 20px;
       font-family: var(--font-mono);
-      font-size: 10px; letter-spacing: 0.22em;
+      font-size: 14px; letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--paper);
       opacity: 0.7;
@@ -768,7 +748,7 @@
       display: flex; flex-direction: column; justify-content: center;
     }
     .pillar-cards.cols-1 .svc-card-subs li {
-      font-size: 14px; padding: 6px 0;
+      font-size: 16px; padding: 6px 0;
     }
     .service-preview {
       position: fixed;
@@ -808,7 +788,7 @@
       right: 10px;
       bottom: 10px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: 0.14em;
       color: rgba(245,242,234,0.7);
     }
@@ -819,7 +799,7 @@
     }
     .service-preview p {
       font-family: var(--font-jp);
-      font-size: 13px;
+      font-size: 15px;
       line-height: 1.7;
       color: var(--paper-2);
     }
@@ -842,7 +822,7 @@
     .works-title em { font-style: italic; color: var(--vermilion); }
     .works-meta {
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       color: var(--gray-600);
       text-transform: uppercase;
       text-align: right;
@@ -877,7 +857,7 @@
     .work:hover .work-img-inner { transform: scale(1.05); }
     .work-placeholder {
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       color: var(--gray-600);
       text-transform: uppercase;
       padding: 12px 20px;
@@ -887,7 +867,7 @@
     .work-cat {
       position: absolute; top: 24px; left: 24px;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       color: var(--paper);
       text-transform: uppercase;
       padding: 8px 14px;
@@ -902,7 +882,7 @@
     .work-meta {
       display: flex; justify-content: space-between;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.18em;
+      font-size: 14px; letter-spacing: 0.18em;
       color: var(--gray-600);
       text-transform: uppercase;
       margin-bottom: 16px;
@@ -917,7 +897,7 @@
     .work-title-en {
       display: block;
       font-family: var(--font-en); font-style: italic;
-      font-size: 16px; font-weight: 400;
+      font-size: 18px; font-weight: 400;
       color: var(--vermilion);
       margin-top: 8px;
     }
@@ -926,7 +906,7 @@
     }
     .work-tag {
       font-family: var(--font-mono);
-      font-size: 10px; letter-spacing: 0.16em;
+      font-size: 14px; letter-spacing: 0.16em;
       color: var(--gray-600);
       text-transform: uppercase;
       padding: 4px 10px;
@@ -951,7 +931,7 @@
     }
     .number-label {
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       color: var(--vermilion);
       text-transform: uppercase;
       margin-bottom: 24px;
@@ -976,7 +956,7 @@
     }
     .number-desc {
       font-family: var(--font-jp);
-      font-size: 14px;
+      font-size: 16px;
       color: var(--gray-500);
       margin-top: 24px;
       text-wrap: pretty;
@@ -985,7 +965,7 @@
 
     /* ============ MANIFESTO / VALUES ============ */
     .manifesto {
-      padding: 200px 48px;
+      padding: 220px 48px;
       background: var(--ink);
       position: relative;
       overflow: hidden;
@@ -1007,17 +987,7 @@
       position: relative; z-index: 1;
       max-width: 1600px; margin: 0 auto;
     }
-    .manifesto-tag {
-      font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
-      color: var(--vermilion);
-      text-transform: uppercase;
-      margin-bottom: 60px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .manifesto-tag::before {
-      content: '§'; font-family: var(--font-en); font-style: italic; font-size: 18px;
-    }
+    .manifesto-tag { display: none; }
     .values-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 60px 80px;
@@ -1044,7 +1014,7 @@
     }
     .value-body {
       font-family: var(--font-jp);
-      font-size: 14px; line-height: 1.85;
+      font-size: 16px; line-height: 1.85;
       color: var(--gray-600);
       text-wrap: pretty;
     }
@@ -1063,7 +1033,7 @@
     .manifesto.story-mode .value-num {
       font-family: var(--font-mono);
       font-style: normal;
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 0.16em;
       color: var(--gray-600);
       margin-bottom: 16px;
@@ -1073,7 +1043,7 @@
       margin-bottom: 12px;
     }
     .manifesto.story-mode .value-body {
-      font-size: 15px;
+      font-size: 17px;
       line-height: 1.9;
       color: var(--paper-2);
     }
@@ -1113,20 +1083,14 @@
 
     /* ============ CTA ============ */
     .cta {
-      padding: 200px 48px;
+      padding: 220px 48px;
       background: var(--paper);
       color: var(--ink);
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .cta-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
-      color: var(--vermilion);
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
+    .cta-eyebrow { display: none; }
     .cta-title {
       font-family: var(--font-en); font-weight: 300;
       font-size: clamp(72px, 12vw, 200px);
@@ -1150,13 +1114,13 @@
       color: var(--paper);
       text-decoration: none;
       font-family: var(--font-mono);
-      font-size: 12px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       text-transform: uppercase;
       border-radius: 999px;
       transition: transform 0.4s, background 0.4s;
     }
     .cta-button:hover { transform: translateY(-4px); background: var(--vermilion); }
-    .cta-button-arrow { font-size: 16px; }
+    .cta-button-arrow { font-size: 18px; }
     .contact-panel {
       max-width: 900px;
       margin: 56px auto 0;
@@ -1180,7 +1144,7 @@
     }
     .contact-panel-copy {
       font-family: var(--font-jp);
-      font-size: 14px;
+      font-size: 16px;
       color: var(--gray-500);
       margin-bottom: 22px;
     }
@@ -1197,7 +1161,7 @@
     .contact-field.full { grid-column: 1 / -1; }
     .contact-field label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--gray-500);
@@ -1208,7 +1172,7 @@
       border: 1px solid var(--rule-light);
       padding: 12px 14px;
       font-family: var(--font-jp);
-      font-size: 14px;
+      font-size: 16px;
       color: var(--ink);
       background: #fff;
       outline: none;
@@ -1228,7 +1192,7 @@
       align-items: center;
       gap: 10px;
       font-family: var(--font-jp);
-      font-size: 13px;
+      font-size: 15px;
       color: var(--gray-500);
     }
     .contact-submit {
@@ -1236,12 +1200,12 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 22px;
+      padding: 14px 24px;
       border: none;
       background: var(--ink);
       color: var(--paper);
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 14px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       cursor: pointer;
@@ -1253,7 +1217,7 @@
     .contact-result {
       margin-top: 14px;
       font-family: var(--font-jp);
-      font-size: 14px;
+      font-size: 16px;
       color: var(--ink);
       min-height: 1.6em;
       transition: color 0.3s;
@@ -1295,7 +1259,7 @@
     }
     .footer-col h5 {
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       color: var(--gray-600);
       text-transform: uppercase;
       margin-bottom: 24px;
@@ -1304,7 +1268,7 @@
     .footer-col a, .footer-col p {
       display: block;
       font-family: var(--font-jp);
-      font-size: 14px;
+      font-size: 16px;
       color: var(--paper);
       text-decoration: none;
       line-height: 1.9;
@@ -1317,7 +1281,7 @@
       border-top: 1px solid var(--rule);
       display: flex; justify-content: space-between;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.18em;
+      font-size: 14px; letter-spacing: 0.18em;
       color: var(--gray-600);
       text-transform: uppercase;
     }
@@ -1346,7 +1310,7 @@
     .loader-pct {
       position: absolute; bottom: 48px; right: 48px;
       font-family: var(--font-mono);
-      font-size: 11px; letter-spacing: 0.2em;
+      font-size: 14px; letter-spacing: 0.2em;
       color: var(--gray-600);
     }
 
@@ -1458,35 +1422,35 @@
       .hero { padding: 110px 20px 60px; min-height: auto; }
       .hero-title { font-size: clamp(54px, 16vw, 96px) !important; line-height: 0.95 !important; }
       .hero-jp { font-size: 17px !important; letter-spacing: 0.06em !important; font-weight: 500 !important; margin-top: 36px !important; color: var(--paper) !important; }
-      .hero-meta { font-size: 11px; flex-direction: column; gap: 14px; align-items: flex-start; }
+      .hero-meta { font-size: 14px; flex-direction: column; gap: 14px; align-items: flex-start; }
       .hero-meta-left .meta-bar { width: 36px; }
-      .hero-meta-right { text-align: left; font-size: 16px; }
+      .hero-meta-right { text-align: left; font-size: 18px; }
       .hero-bottom { justify-content: flex-start; }
       .hero-bottom, .hero-scroll { display: flex; }
 
       /* Ticker */
-      .ticker { font-size: 10px; padding: 6px 0; }
+      .ticker { font-size: 13px; padding: 6px 0; }
 
       /* Loader */
       .loader-text { font-size: clamp(40px, 14vw, 80px); }
-      .loader-pct { right: 20px; bottom: 24px; }
+      .loader-pct { right: 20px; bottom: 24px; font-size: 13px; }
 
       /* Common section spacing */
-      .concept { padding: 90px 20px 60px; min-height: auto; }
-      .concept-eyebrow-top { top: 24px; left: 20px; font-size: 14px; }
-      .concept-eyebrow-top em { font-size: 18px; }
-      .concept-grid { grid-template-columns: 1fr; gap: 40px; }
+      .concept { padding: 130px 20px 90px; min-height: auto; }
+      .concept-eyebrow-top { top: 32px; left: 20px; font-size: 16px; }
+      .concept-eyebrow-top em { font-size: 22px; }
+      .concept-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
       .concept-jp-large { font-size: clamp(20px, 5.2vw, 28px) !important; line-height: 1.8 !important; }
       .concept-jp-large .em { font-size: 1.1em !important; }
       .br-pc { display: none; }
       .br-mobile { display: initial; }
       .concept-body { font-size: 16px !important; }
       .concept-list { margin-top: 16px; }
-      .concept-list .text { font-size: 15px !important; }
-      .concept-resolve { font-size: 14px !important; line-height: 1.85 !important; margin-top: 24px !important; }
+      .concept-list .text { font-size: 16px !important; }
+      .concept-resolve { font-size: 16px !important; line-height: 1.85 !important; margin-top: 24px !important; }
 
       /* Services & Pillars */
-      .services { padding: 100px 0 0; }
+      .services { padding: 130px 0 0; }
       .services-header { padding: 0 20px 32px; grid-template-columns: 1fr; gap: 24px; }
       .services-title { font-size: clamp(36px, 9vw, 56px) !important; }
       .manifesto.story-mode h2.manifesto-story-heading {
@@ -1495,14 +1459,13 @@
       }
       .service-pillars { gap: 40px; padding: 16px 20px 0; }
       .pillar { padding-top: 28px; }
-      .pillar-tag { font-size: 10px; }
+      .pillar-tag { font-size: 14px; }
       .pillar-title { font-size: clamp(26px, 7vw, 38px) !important; white-space: normal !important; line-height: 1.15 !important; }
-      .pillar-jp { font-size: 14px; }
       .pillar-cards { grid-template-columns: 1fr; gap: 12px; }
       .svc-card { min-height: auto; padding: 24px 20px; }
-      .svc-card-en { font-size: 14px !important; white-space: normal !important; }
+      .svc-card-en { font-size: 16px !important; white-space: normal !important; }
       .svc-card-title { font-size: 26px; font-weight: 800; margin-bottom: 14px; }
-      .svc-card-desc { font-size: 14px !important; }
+      .svc-card-desc { font-size: 16px !important; }
       .pillar-cards.cols-1 .svc-card {
         grid-template-columns: 1fr; gap: 20px; padding: 24px 20px;
       }
@@ -1512,7 +1475,7 @@
         padding-left: 0; padding-top: 16px;
         flex-direction: row; flex-wrap: wrap; gap: 16px;
       }
-      .pillar-cards.cols-1 .svc-card-subs li { font-size: 13px; padding: 0; }
+      .pillar-cards.cols-1 .svc-card-subs li { font-size: 15px; padding: 0; }
 
       /* Service rows (legacy) — hidden anyway but cleanup */
       .service-row { padding: 32px 20px; grid-template-columns: 50px 1fr; gap: 12px; }
@@ -1529,34 +1492,34 @@
       .numbers { padding: 80px 20px; }
       .numbers-grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
       .num-val { font-size: clamp(32px, 10vw, 56px) !important; }
-      .manifesto { padding: 80px 20px; }
+      .manifesto { padding: 130px 20px 80px; }
       .values-grid { grid-template-columns: 1fr; gap: 32px; }
 
       /* CTA & Contact form */
-      .cta { padding: 80px 20px; }
+      .cta { padding: 130px 20px 80px; }
       .cta-title { font-size: clamp(40px, 11vw, 72px) !important; line-height: 0.95 !important; }
-      .cta-jp { font-size: 14px; }
-      .cta-button { padding: 18px 28px; font-size: 12px; }
+      .cta-jp { font-size: 16px; }
+      .cta-button { padding: 18px 28px; font-size: 14px; }
       .contact-panel { margin-top: 32px; padding: 20px; }
       .contact-form-grid { grid-template-columns: 1fr; gap: 12px; }
       .contact-field input, .contact-field textarea {
         padding: 14px; font-size: 16px; /* 16px prevents iOS zoom on focus */
       }
-      .contact-submit { width: 100%; justify-content: center; padding: 16px; font-size: 12px; }
-      .contact-consent { font-size: 13px; line-height: 1.6; }
+      .contact-submit { width: 100%; justify-content: center; padding: 16px; font-size: 14px; }
+      .contact-consent { font-size: 15px; line-height: 1.6; }
 
       /* Footer */
       .footer { padding: 64px 20px 24px; }
       .footer-massive { font-size: clamp(64px, 22vw, 140px) !important; margin-bottom: 56px; }
       .footer-brand-mark img { height: 56px !important; }
       .footer-meta { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; }
-      .footer-col h5 { font-size: 11px; margin-bottom: 12px; }
-      .footer-col a, .footer-col p { font-size: 14px; padding: 6px 0; min-height: 32px; }
-      .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; padding-top: 32px; margin-top: 32px; font-size: 10px; }
+      .footer-col h5 { font-size: 14px; margin-bottom: 12px; }
+      .footer-col a, .footer-col p { font-size: 16px; padding: 6px 0; min-height: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; padding-top: 32px; margin-top: 32px; font-size: 13px; }
 
-      /* Section numbers (decorative §) */
-      .section-num { font-size: 13px !important; top: 24px !important; right: 20px !important; padding: 0; }
-      .section-num em { font-size: 16px !important; }
+      /* Section numbers (decorative §) — top-left, larger to match concept-eyebrow-top */
+      .section-num { font-size: 16px !important; top: 32px !important; left: 20px !important; right: auto !important; padding: 0; gap: 10px; }
+      .section-num em { font-size: 22px !important; }
 
       /* Misc */
       .reveal { transform: translateY(20px); }
@@ -1565,10 +1528,10 @@
     /* ---- Small Mobile (≤ 480px) ---- */
     @media (max-width: 480px) {
       .nav { padding: 14px 16px; }
-      .nav-logo { font-size: 13px; }
+      .nav-logo { font-size: 14px; }
       .hero { padding: 96px 16px 48px; }
       .hero-title { font-size: clamp(44px, 14vw, 72px) !important; }
-      .hero-meta { font-size: 9px; }
+      .hero-meta { font-size: 13px; }
       .concept, .works, .numbers, .manifesto, .cta { padding-left: 16px; padding-right: 16px; }
       .service-pillars { padding: 12px 16px 0; }
       .svc-card { padding: 20px 16px; }
@@ -1597,7 +1560,7 @@
 
   <!-- Loader -->
   <div class="loader" id="loader">
-    <div class="loader-text"><span class="brand-mark">REQS</span><sup style="font-family: var(--font-mono); font-size: 14px; vertical-align: super; margin-left: 12px; color: var(--gray-500);">2026</sup></div>
+    <div class="loader-text"><span class="brand-mark">REQS</span><sup style="font-family: var(--font-mono); font-size: 16px; vertical-align: super; margin-left: 12px; color: var(--gray-500);">2026</sup></div>
     <div class="loader-pct" id="loaderPct">000 / 100</div>
   </div>
 
@@ -1623,7 +1586,7 @@
   <nav class="nav" data-cursor="hover">
     <a href="#" class="nav-logo" style="text-decoration:none;color:inherit;"><img src="assets/reqs-logo-white.svg" alt="" class="brand-glyph" /><span class="brand-mark">REQS</span><span class="dot">.</span></a>
     <div class="nav-links" id="navLinks">
-      <a href="#about">About</a>
+      <a href="#about">Concept</a>
       <a href="#services">Services</a>
       <a href="#values">Mission</a>
       <a href="#contact">Contact</a>
@@ -1635,7 +1598,7 @@
   </nav>
   <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="#about">About</a>
+    <a href="#about">Concept</a>
     <a href="#services">Services</a>
     <a href="#values">Mission</a>
     <a href="#contact">Contact</a>
