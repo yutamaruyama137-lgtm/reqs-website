@@ -1151,6 +1151,12 @@
     }
     .cta-button:hover { transform: translateY(-4px); background: var(--vermilion); }
     .cta-button-arrow { font-size: 18px; }
+    .cta-note {
+      margin-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 13px; letter-spacing: 0.12em;
+      color: var(--gray-500);
+    }
     .contact-panel {
       max-width: 900px;
       margin: 56px auto 0;
@@ -1621,9 +1627,9 @@
       <a href="#about">Concept</a>
       <a href="#services">Services</a>
       <a href="#values">Mission</a>
-      <a href="#contact">Contact</a>
+      <a href="contact.html">Contact</a>
     </div>
-    <a href="#contact" class="nav-cta">Inquiry</a>
+    <a href="contact.html" class="nav-cta">Inquiry</a>
     <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -1633,8 +1639,8 @@
     <a href="#about">Concept</a>
     <a href="#services">Services</a>
     <a href="#values">Mission</a>
-    <a href="#contact">Contact</a>
-    <a href="#contact" class="mobile-menu-cta">Inquiry →</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="mobile-menu-cta">無料AX診断 →</a>
   </div>
 
   <!-- Hero -->
@@ -1971,45 +1977,12 @@
       <em>Ready</em><br/>
       to <em>Create?</em>
     </h2>
-    <p class="cta-jp reveal">私たちと共にAI時代を創るパートナーはあなたです。</p>
-    <a href="#contact-form-panel" class="cta-button reveal" id="openContactForm">
-      <span>お問い合わせ</span>
+    <p class="cta-jp reveal">まずは、あなたの会社の"AIの使いどころ"を一緒に見つけませんか。</p>
+    <a href="contact.html" class="cta-button reveal">
+      <span>無料AX診断を予約する</span>
       <span class="cta-button-arrow">→</span>
     </a>
-    <div class="contact-panel reveal" id="contact-form-panel">
-      <h3 class="contact-panel-title">お問い合わせフォーム</h3>
-      <p class="contact-panel-copy">ご相談内容を入力いただければ、内容を確認のうえ担当よりご連絡します。</p>
-      <form id="contactForm" novalidate>
-        <div class="contact-form-grid">
-          <div class="contact-field">
-            <label for="contactName">お名前 *</label>
-            <input id="contactName" name="name" type="text" required>
-          </div>
-          <div class="contact-field">
-            <label for="contactCompany">会社名</label>
-            <input id="contactCompany" name="company" type="text">
-          </div>
-          <div class="contact-field">
-            <label for="contactEmail">メールアドレス *</label>
-            <input id="contactEmail" name="email" type="email" required>
-          </div>
-          <div class="contact-field">
-            <label for="contactPhone">電話番号</label>
-            <input id="contactPhone" name="phone" type="tel">
-          </div>
-          <div class="contact-field full">
-            <label for="contactMessage">ご相談内容 *</label>
-            <textarea id="contactMessage" name="message" required></textarea>
-          </div>
-        </div>
-        <label class="contact-consent">
-          <input type="checkbox" id="contactConsent" required>
-          個人情報の取り扱いに同意します *
-        </label>
-        <button class="contact-submit" type="submit">送信する →</button>
-        <p class="contact-result" id="contactResult"></p>
-      </form>
-    </div>
+    <p class="cta-note reveal">オンライン ・ 45分 ・ 無料 ／ カレンダーから空き枠を選ぶだけ</p>
   </section>
 
   <!-- Footer -->
@@ -2043,11 +2016,6 @@
     </div>
   </footer>
 
-  <!-- EmailJS SDK (Contact form) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    emailjs.init({ publicKey: '4X-cAwUOs5FYULv7O' });
-  </script>
   <script>
     // Loader
     const loader = document.getElementById('loader');
@@ -2158,75 +2126,6 @@
       row.addEventListener('mousemove', (e) => movePreview(e.clientX, e.clientY));
       row.addEventListener('mouseleave', () => servicePreview.classList.remove('show'));
     });
-
-    // Contact form open + local submit feedback
-    const openContactForm = document.getElementById('openContactForm');
-    const contactPanel = document.getElementById('contact-form-panel');
-    const contactForm = document.getElementById('contactForm');
-    const contactResult = document.getElementById('contactResult');
-    if (openContactForm && contactPanel) {
-      openContactForm.addEventListener('click', (e) => {
-        e.preventDefault();
-        contactPanel.classList.add('open');
-        contactPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => document.getElementById('contactName')?.focus(), 300);
-      });
-    }
-    if (contactForm && contactResult) {
-      const submitBtn = contactForm.querySelector('.contact-submit');
-      const EMAILJS_SERVICE_ID = 'service_vxaw0yc';
-      const EMAILJS_TEMPLATE_ID = 'template_xm857rk';
-
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Validate
-        const formData = new FormData(contactForm);
-        const requiredOk =
-          (formData.get('name') || '').toString().trim() &&
-          (formData.get('email') || '').toString().trim() &&
-          (formData.get('message') || '').toString().trim() &&
-          document.getElementById('contactConsent')?.checked;
-
-        contactResult.classList.remove('success', 'error');
-        if (!requiredOk) {
-          contactResult.textContent = '必須項目を入力し、同意チェックを入れてください。';
-          contactResult.classList.add('error');
-          return;
-        }
-
-        // Build payload — variable names must match EmailJS template
-        const params = {
-          name: (formData.get('name') || '').toString().trim(),
-          company: (formData.get('company') || '').toString().trim() || '（未記入）',
-          email: (formData.get('email') || '').toString().trim(),
-          phone: (formData.get('phone') || '').toString().trim() || '（未記入）',
-          message: (formData.get('message') || '').toString().trim(),
-          consent: '同意済み',
-          time: new Date().toLocaleString('ja-JP', {
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit',
-          }),
-        };
-
-        // Send
-        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
-        contactResult.textContent = '送信しています…';
-
-        try {
-          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-          contactResult.textContent = 'お問い合わせありがとうございます。内容を確認のうえ、担当よりご連絡します。';
-          contactResult.classList.add('success');
-          contactForm.reset();
-        } catch (err) {
-          console.error('EmailJS send error:', err);
-          contactResult.textContent = '送信に失敗しました。お手数ですが時間をおいて再度お試しください。';
-          contactResult.classList.add('error');
-        } finally {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '送信する →'; }
-        }
-      });
-    }
 
     // Number counter
     const numIo = new IntersectionObserver((entries) => {
